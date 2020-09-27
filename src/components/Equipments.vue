@@ -21,7 +21,7 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .Equipments {
   margin-top: 10px;
 }

@@ -23,8 +23,8 @@ export default {
 }
 </script>
 
-<style>
-@import '~@/sass/_fonts.scss';
+<style lang="scss">
+@import '@/sass/_fonts.scss';
 
 .App {
   margin: 30px 20px;
@@ -41,5 +41,9 @@ export default {
   border: 1px solid #D3D3D3;
   border-radius: 5px;
   padding: 20px;
+
+  & + & {
+    margin-left: 10px;
+  }
 }
 </style>

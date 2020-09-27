@@ -6,7 +6,7 @@
 export default { name: 'Equipment' };
 </script>
 
-<style>
+<style lang="scss">
 .Equipment {
   display: inline-block;
   box-sizing: border-box;
@@ -15,5 +15,9 @@ export default { name: 'Equipment' };
   border: 1px solid #EEEEEE;
   border-radius: 2px;
   padding: 10px;
+
+  & + & {
+    margin-left: 10px;
+  }
 }
 </style>

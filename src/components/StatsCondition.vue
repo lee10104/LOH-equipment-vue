@@ -6,7 +6,7 @@
 export default { name: 'StatsCondition' };
 </script>
 
-<style>
+<style lang="scss">
 .StatsCondition {
   width: calc(70% - 10px);
   display: inline-block;

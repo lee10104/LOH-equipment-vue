@@ -32,11 +32,10 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
 .HeroInfo {
   width: 30%;
   display: inline-block;
-  margin-right: 10px;
 }
 
 .HeroInfo__name {
