@@ -1,8 +1,8 @@
 <template>
   <div class="Equipments">
     <div class="Equipments__header">
-      <button>장비 추가</button>
-      <button>주의사항</button>
+      <AppButton label="장비 추가" />
+      <AppButton label="주의사항" color="red" />
     </div>
     <div class="Equipments__container">
       <Equipment />
@@ -13,11 +13,12 @@
 </template>
 
 <script>
+import AppButton from './AppButton';
 import Equipment from './Equipment';
 
 export default {
   name: 'Equipments',
-  components: { Equipment }
+  components: { AppButton, Equipment }
 };
 </script>
 
