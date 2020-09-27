@@ -24,8 +24,12 @@ export default {
 </script>
 
 <style>
+@import '~@/sass/_fonts.scss';
+
 .App {
   margin: 30px 20px;
+  font-family: 'NotoSansCJKkr';
+  color: #424244;
 }
 
 .App__body {
