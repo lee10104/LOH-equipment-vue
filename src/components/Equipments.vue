@@ -13,12 +13,11 @@
 </template>
 
 <script>
-import AppButton from './AppButton';
 import Equipment from './Equipment';
 
 export default {
   name: 'Equipments',
-  components: { AppButton, Equipment }
+  components: { Equipment }
 };
 </script>
 

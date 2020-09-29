@@ -15,12 +15,7 @@
 </template>
 
 <script>
-import AppButton from './AppButton';
-
-export default {
-  name: 'AppDialog',
-  components: { AppButton }
-};
+export default { name: 'AppDialog' };
 </script>
 
 <style lang="scss">
