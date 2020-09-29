@@ -8,7 +8,7 @@
         <slot name="content" />
       </div>
       <div class="AppDialog__footer">
-        <AppButton class="AppDialog__close-button" label="닫기" @click="$emit('close')" />
+        <AppButton class="AppDialog__close-button" :label="$t('close')" @click="$emit('close')" />
       </div>
     </div>
   </transition>

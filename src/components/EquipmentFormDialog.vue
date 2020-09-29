@@ -2,19 +2,19 @@
   <AppDialog @close="$emit('close')">
     <template #title>{{ title }}</template>
     <template #content>
-      <div class="AppEquipmentDialog__option-title">주옵션</div>
+      <div class="AppEquipmentDialog__option-title">{{ $t('equipment.main_option') }}</div>
       <div class="AppEquipmentDialog__main-option">
-        {{ mainOption.label }}
+        {{ $t(`stats.${mainOption.id}`) }}
         <input type="text" class="AppEquipmentDialog__value" :value="mainOption.value">
       </div>
       <div class="AppEquipmentDialog__sub-options">
-        <div class="AppEquipmentDialog__option-title">부옵션</div>
+        <div class="AppEquipmentDialog__option-title">{{ $t('equipment.sub_option') }}</div>
         <div
           class="AppEquipmentDialog__sub-option"
           v-for="subOption in subOptions"
           v-bind:key="subOption.id"
         >
-          {{ subOption.label }}
+          {{ $t(`stats.${subOption.id}`) }}
           <input type="text" class="AppEquipmentDialog__value" :value="subOption.value">
         </div>
       </div>
@@ -30,12 +30,12 @@ export default {
   },
   data() {
     return {
-      mainOption: { id: 'attack', label: '공격력', value: 67, type: 'percentage' },
+      mainOption: { id: 'attack', value: 67, type: 'percentage' },
       subOptions: [
-        { id: 'health', label: '공격력', value: 375 },
-        { id: 'defense', label: '방어력', value: 6, type: 'percentage' },
-        { id: 'critical_hit_damage', label: '치명타 피해', value: 13, type: 'percentage' },
-        { id: 'attack', label: '공격력', value: 64 }
+        { id: 'health', value: 375 },
+        { id: 'defense', value: 6, type: 'percentage' },
+        { id: 'critical_hit_damage', value: 13, type: 'percentage' },
+        { id: 'attack', value: 64 }
       ]
     }
   }

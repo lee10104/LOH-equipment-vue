@@ -1,0 +1,12 @@
+{
+  "stats": {
+    "health": "체력",
+    "attack": "공격력",
+    "defense": "방어력",
+    "speed": "속도",
+    "critical_hit_rate": "치명타 확률",
+    "critical_hit_damage": "치명타 피해",
+    "debuff_rate": "효과 적중",
+    "resistance": "효과 저항"
+  }
+}

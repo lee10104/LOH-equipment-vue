@@ -1,0 +1,36 @@
+{
+  "heroes": {
+    "name": {
+      "aslan": "아슬란",
+      "charlotte": "샬롯",
+      "chrome": "크롬",
+      "cyan": "시안",
+      "fram": "프람",
+      "frau": "프라우",
+      "helga": "헬가",
+      "johann": "요한",
+      "joshua": "조슈아",
+      "lairei": "라이레이",
+      "laplas": "라플라스",
+      "lucilika": "루실리카",
+      "lumie": "루미에",
+      "meiling": "메이링",
+      "mikhail": "미하일",
+      "nine": "나인",
+      "olga": "올가",
+      "rosanna": "로잔나",
+      "schneider": "슈나이더",
+      "vanessa": "바네사",
+      "walter": "발터",
+      "zaira": "자이라",
+      "zhurahan": "즈라한"
+    },
+    "type": {
+      "darkness": "어둠",
+      "fire": "불",
+      "water": "물",
+      "earth": "대지",
+      "light": "빛"
+    }
+  }
+}

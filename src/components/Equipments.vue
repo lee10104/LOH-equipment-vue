@@ -1,11 +1,11 @@
 <template>
   <div class="Equipments">
     <div class="Equipments__header">
-      <AppButton label="장비 추가" @click="onOffEquipmentFormDialog"/>
-      <AppButton label="주의사항" color="red" />
+      <AppButton :label="$t('equipment.add')" @click="onOffEquipmentFormDialog"/>
+      <AppButton :label="$t('warning')" color="red" />
       <EquipmentFormDialog
         v-if="showEquipmentFormDialog"
-        title="장비 추가"
+        :title="$t('equipment.add')"
         @close="onOffEquipmentFormDialog"
       />
     </div>

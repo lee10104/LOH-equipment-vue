@@ -1,0 +1,9 @@
+{
+  "close": "닫기",
+  "equipment": {
+    "add": "장비 추가",
+    "main_option": "주옵션",
+    "sub_option": "부옵션"
+  },
+  "warning": "주의사항"
+}
