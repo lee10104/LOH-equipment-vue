@@ -1,8 +1,13 @@
 <template>
   <div class="Equipments">
     <div class="Equipments__header">
-      <AppButton label="장비 추가" />
+      <AppButton label="장비 추가" @click="onOffEquipmentFormDialog"/>
       <AppButton label="주의사항" color="red" />
+      <EquipmentFormDialog
+        v-if="showEquipmentFormDialog"
+        title="장비 추가"
+        @close="onOffEquipmentFormDialog"
+      />
     </div>
     <div class="Equipments__container">
       <Equipment />
@@ -14,10 +19,21 @@
 
 <script>
 import Equipment from './Equipment';
+import EquipmentFormDialog from './EquipmentFormDialog';
 
 export default {
   name: 'Equipments',
-  components: { Equipment }
+  components: { Equipment, EquipmentFormDialog },
+  data() {
+    return {
+      showEquipmentFormDialog: false
+    }
+  },
+  methods: {
+    onOffEquipmentFormDialog() {
+      this.showEquipmentFormDialog = !this.showEquipmentFormDialog;
+    }
+  }
 };
 </script>
 

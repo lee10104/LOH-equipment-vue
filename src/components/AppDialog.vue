@@ -32,7 +32,7 @@ export default { name: 'AppDialog' };
 }
 
 .AppDialog__title {
-  margin: 20px 30px 10px 30px;
+  margin: 20px 30px 20px 30px;
   font-weight: bold;
   font-size: 25px;
 }
