@@ -11,25 +11,23 @@
 </template>
 
 <script>
+import Hero from '@/hero';
+
 export default {
   name: 'HeroInfo',
   data() {
-    return {
-      id: 'helga',
-      heroType: 'water',
-      stats: [
-        { id: 'health', value: 7311 },
-        { id: 'attack', value: 1339 },
-        { id: 'defense', value: 1199 },
-        { id: 'speed', value: 102 },
-        { id: 'critical_hit_rate', value: 30, type: 'percentage' },
-        { id: 'critical_hit_damage', value: 60, type: 'percentage' },
-        { id: 'debuff_rate', value: 20, type: 'percentage' },
-        { id: 'resistance', value: 35, type: 'percentage' }
-      ]
-    };
+    return { id: 'helga', heroType: 'water' };
   },
   computed: {
+    hero() {
+      return new Hero(this.id, this.heroType);
+    },
+    stats() {
+      if (this.hero === null)
+        return null;
+
+      return this.hero.stats;
+    },
     heroTypeName() {
       return this.$t(`heroes.type.${this.heroType}`);
     },
