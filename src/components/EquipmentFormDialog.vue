@@ -5,7 +5,16 @@
       <div class="AppEquipmentDialog__option-title">{{ $t('equipment.main_option') }}</div>
       <div class="AppEquipmentDialog__main-option">
         {{ $t(`stats.${mainOption.id}`) }}
-        <input type="text" class="AppEquipmentDialog__value" :value="mainOption.value">
+        <div class="AppEquipmentDialog__value">
+          <input type="text" class="AppEquipmentDialog__input" :value="mainOption.value">
+          <AppButton
+            class="AppEquipmentDialog__button"
+            :label="isPercentage(mainOption.type) ? '%' : '.'"
+            color="light-grey"
+            size="small"
+            @click="updateStatType('main')"
+          />
+        </div>
       </div>
       <div class="AppEquipmentDialog__sub-options">
         <div class="AppEquipmentDialog__option-title">{{ $t('equipment.sub_option') }}</div>
@@ -15,7 +24,16 @@
           v-bind:key="subOption.id"
         >
           {{ $t(`stats.${subOption.id}`) }}
-          <input type="text" class="AppEquipmentDialog__value" :value="subOption.value">
+          <div class="AppEquipmentDialog__value">
+            <input type="text" class="AppEquipmentDialog__input" :value="subOption.value">
+            <AppButton
+              class="AppEquipmentDialog__button"
+              :label="isPercentage(subOption.type) ? '%' : '.'"
+              color="light-grey"
+              size="small"
+              @click="updateStatType('main')"
+            />
+          </div>
         </div>
       </div>
     </template>
@@ -38,6 +56,11 @@ export default {
         { id: 'attack', value: 64 }
       ]
     }
+  },
+  methods: {
+    isPercentage(type) {
+      return type === 'percentage';
+    }
   }
 };
 </script>
@@ -51,8 +74,10 @@ export default {
 
 .AppEquipmentDialog__main-option {
   font-size: 20px;
-  height: 35px;
-  line-height: 35px;
+  height: 34px;
+  line-height: 34px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .AppEquipmentDialog__sub-options {
@@ -61,12 +86,22 @@ export default {
 
 .AppEquipmentDialog__sub-option {
   margin-top: 15px;
-  height: 35px;
-  line-height: 35px;
+  height: 34px;
+  line-height: 34px;
+  display: flex;
+  justify-content: space-between;
 }
 
-.AppEquipmentDialog__value {
+.AppEquipmentDialog__input {
+  height: 34px;
+  width: 70px;
   text-align: right;
-  float: right;
+  box-sizing: border-box;
+  vertical-align: top;
+}
+
+.AppEquipmentDialog__button {
+  margin-left: 5px;
+  vertical-align: top;
 }
 </style>
