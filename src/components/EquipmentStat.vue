@@ -1,9 +1,15 @@
 <template>
   <div class="EquipmentStat">
-    {{ $t(`stats.${stat.id}`) }}
+    <select name="id" v-model="selected" @input="update('id', $event.target.value)">
+      <option v-for="statId in statIdList" v-bind:key="statId" :value="statId">
+        {{ $t(`stats.${statId}`) }}
+      </option>
+    </select>
+
     <div class="EquipmentStat__value">
-      <input type="text" class="EquipmentStat__input" :value="stat.value">
+      <input type="text" class="EquipmentStat__input" :value="stat.value" @input="update('value', $event.target.value)">
       <AppButton
+        @click="updateType"
         class="EquipmentStat__button"
         :label="isPercentage ? '%' : '.'"
         color="light-grey"
@@ -14,14 +20,40 @@
 </template>
 
 <script>
+import { statIdList } from '@/stats';
+
 export default {
   name: 'EquipmentStat',
   props: {
+    index: { type: Number, required: true },
     stat: { type: Object, required: true }
   },
+  data() {
+    return {
+      selected: this.stat.id,
+      type: this.stat.type,
+    };
+  },
   computed: {
+    statIdList: () => statIdList,
     isPercentage() {
-      return this.stat.type === 'percentage';
+      return this.type === 'percentage';
+    }
+  },
+  methods: {
+    updateType() {
+      let newType = '';
+      if (this.isPercentage) newType = 'number';
+      else newType = 'percentage';
+
+      this.type = newType;
+      this.$emit('input', this.index, { ...this.stat, type: newType });
+    },
+    update(key, value) {
+      const newStat = { ...this.stat };
+      newStat[key] = value;
+
+      this.$emit('input', this.index, newStat);
     }
   }
 };

@@ -4,16 +4,16 @@
     <template #content>
       <div class="AppEquipmentDialog__option-title">{{ $t('equipment.main_option') }}</div>
       <div class="AppEquipmentDialog__main-option">
-        <EquipmentStat :stat="mainOption" />
+        <EquipmentStat :stat="mainOption" :index="0" @input="updateOption" />
       </div>
       <div class="AppEquipmentDialog__sub-options">
         <div class="AppEquipmentDialog__option-title">{{ $t('equipment.sub_option') }}</div>
         <div
           class="AppEquipmentDialog__sub-option"
-          v-for="subOption in subOptions"
+          v-for="(subOption, index) in subOptions"
           v-bind:key="subOption.id"
         >
-          <EquipmentStat :stat="subOption" />
+          <EquipmentStat :stat="subOption" :index="index + 1" @input="updateOption" />
         </div>
       </div>
     </template>
@@ -38,6 +38,14 @@ export default {
         { id: 'critical_hit_damage', value: 13, type: 'percentage' },
         { id: 'attack', value: 64 }
       ]
+    };
+  },
+  methods: {
+    updateOption(index, newOption) {
+      if (index === 0)
+        this.mainOption = { ...this.mainOption, ...newOption };
+      else
+        this.subOptions[index - 1] = { ...this.subOptions[index - 1], ...newOption };
     }
   }
 };
