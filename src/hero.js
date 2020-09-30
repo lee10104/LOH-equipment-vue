@@ -1,4 +1,5 @@
 import heroes from '@/assets/data/heroes.json';
+import { getBaseType } from '@/stats';
 
 class Hero {
   constructor(id, type) {
@@ -6,15 +7,9 @@ class Hero {
   }
 
   get stats() {
-    return Object.keys(this.heroStats).map(id => {
-      let type = null;
-      if (['health', 'attack', 'defense', 'speed'].includes(id))
-        type = 'number';
-      else
-        type = 'percentage';
-
-      return { id, value: this.heroStats[id], type };
-    });
+    return Object.keys(this.heroStats).map(id => (
+      { id, value: this.heroStats[id], type: getBaseType(id) }
+    ));
   }
 }
 
