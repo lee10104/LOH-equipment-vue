@@ -1,5 +1,5 @@
 <template>
-  <AppDialog @close="$emit('close')">
+  <AppDialog :show-submit-button="true" @close="$emit('close')">
     <template #title>{{ title }}</template>
     <template #content>
       <div class="AppEquipmentDialog__option-title">{{ $t('equipment.main_option') }}</div>

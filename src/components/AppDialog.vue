@@ -8,14 +8,20 @@
         <slot name="content" />
       </div>
       <div class="AppDialog__footer">
-        <AppButton class="AppDialog__close-button" :label="$t('close')" @click="$emit('close')" />
+        <div class="AppDialog__buttons">
+          <AppButton v-if="showSubmitButton" :label="$t('submit')" :disabled="true" @click="$emit('submit')" />
+          <AppButton :label="$t('close')" @click="$emit('close')" />
+        </div>
       </div>
     </div>
   </transition>
 </template>
 
 <script>
-export default { name: 'AppDialog' };
+export default {
+  name: 'AppDialog',
+  props: { showSubmitButton: { type: Boolean, default: false } }
+};
 </script>
 
 <style lang="scss">
@@ -45,9 +51,14 @@ export default { name: 'AppDialog' };
   width: 100%;
 }
 
-.AppDialog__close-button {
+.AppDialog__footer {
   position: absolute;
-  bottom: 20px;
-  right: 30px;
+  bottom: 0;
+}
+
+.AppDialog__buttons {
+  float: right;
+  margin-bottom: 20px;
+  margin-right: 30px;
 }
 </style>
