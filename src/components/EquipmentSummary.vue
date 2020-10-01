@@ -1,7 +1,7 @@
 <template>
-  <div class="Equipment" @click="$emit('click')">
+  <div class="EquipmentSummary" @click="$emit('click')">
     {{ equipment.grade }}⭐ +{{ equipment.level }}
-    <div class="Equipment__type">{{ $t(`equipment.type.${equipment.type}`) }}</div>
+    <div class="EquipmentSummary__type">{{ $t(`equipment.type.${equipment.type}`) }}</div>
   </div>
 </template>
 
@@ -9,7 +9,7 @@
 import Equipment from '@/equipment';
 
 export default {
-  name: 'Equipment',
+  name: 'EquipmentSummary',
   props: {
     equipmentData: { type: Object, required: true }
   },
@@ -22,7 +22,7 @@ export default {
 </script>
 
 <style lang="scss">
-.Equipment {
+.EquipmentSummary {
   display: inline-block;
   box-sizing: border-box;
   width: 80px;
@@ -39,7 +39,7 @@ export default {
   }
 }
 
-.Equipment__type {
+.EquipmentSummary__type {
   margin-top: 10px;
   font-weight: 700;
 }

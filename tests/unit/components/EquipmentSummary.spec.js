@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
-import Equipment from '@/components/Equipment.vue';
+import EquipmentSummary from '@/components/EquipmentSummary.vue';
 
-describe('Equipment', () => {
+describe('EquipmentSummary', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(Equipment);
+    wrapper = shallowMount(EquipmentSummary);
   });
 
   it('should work', () => {

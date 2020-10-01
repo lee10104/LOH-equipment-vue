@@ -6,7 +6,7 @@
         <AppButton :label="$t('warning')" color="red" @click="onOffNoticeDialog" />
       </div>
       <div class="Equipments__container">
-        <Equipment
+        <EquipmentSummary
           v-for="equipment in equipments"
           v-bind:key="equipment.id"
           :equipment-data="equipment"
@@ -25,13 +25,13 @@
 </template>
 
 <script>
-import Equipment from './Equipment';
+import EquipmentSummary from './EquipmentSummary';
 import EquipmentFormDialog from './EquipmentFormDialog';
 import NoticeDialog from './NoticeDialog';
 
 export default {
   name: 'Equipments',
-  components: { Equipment, EquipmentFormDialog, NoticeDialog },
+  components: { EquipmentSummary, EquipmentFormDialog, NoticeDialog },
   data() {
     return {
       isDialogOpen: false,
