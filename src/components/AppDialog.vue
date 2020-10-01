@@ -9,7 +9,7 @@
       </div>
       <div class="AppDialog__footer">
         <div class="AppDialog__buttons">
-          <AppButton v-if="showSubmitButton" :label="$t('submit')" :disabled="true" @click="$emit('submit')" />
+          <AppButton v-if="showSubmitButton" :label="$t('submit')" :disabled="disableSubmitButton" @click="$emit('submit')" />
           <AppButton :label="$t('close')" @click="$emit('close')" />
         </div>
       </div>
@@ -20,7 +20,10 @@
 <script>
 export default {
   name: 'AppDialog',
-  props: { showSubmitButton: { type: Boolean, default: false } }
+  props: {
+    disableSubmitButton: { type: Boolean, default: false },
+    showSubmitButton: { type: Boolean, default: false }
+  }
 };
 </script>
 

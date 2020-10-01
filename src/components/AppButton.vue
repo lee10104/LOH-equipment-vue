@@ -56,6 +56,7 @@ export default {
     padding: 0;
     height: 34px;
     width: 34px;
+    vertical-align: top;
   }
 
   &--disabled {

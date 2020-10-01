@@ -17,6 +17,7 @@
     <EquipmentFormDialog
       v-if="showEquipmentFormDialog"
       :title="equipmentFormDialogTitle"
+      :equipment="equipmentData"
       @close="onOffEquipmentFormDialog(null)"
     />
     <NoticeDialog v-if="showNoticeDialog" @close="onOffNoticeDialog" />

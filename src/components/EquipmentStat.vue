@@ -1,11 +1,11 @@
 <template>
   <div class="EquipmentStat">
     <select name="id" v-model="selected" @input="update('id', $event.target.value)">
+      <option value="">{{ $t('select') }}</option>
       <option v-for="statId in statIdList" v-bind:key="statId" :value="statId">
         {{ $t(`stats.${statId}`) }}
       </option>
     </select>
-
     <div class="EquipmentStat__value">
       <input type="text" class="EquipmentStat__input" :value="stat.value" @input="update('value', $event.target.value)">
       <AppButton
@@ -30,7 +30,7 @@ export default {
   },
   data() {
     return {
-      selected: this.stat.id,
+      selected: this.stat.id || '',
       type: this.stat.type,
     };
   },
@@ -77,6 +77,5 @@ export default {
 
 .EquipmentStat__button {
   margin-left: 5px;
-  vertical-align: top;
 }
 </style>

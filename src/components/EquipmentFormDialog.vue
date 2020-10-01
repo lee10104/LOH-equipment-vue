@@ -1,5 +1,10 @@
 <template>
-  <AppDialog :show-submit-button="true" @close="$emit('close')">
+  <AppDialog
+    :disable-submit-button="true"
+    :show-submit-button="true"
+    @submit="submit"
+    @close="$emit('close')"
+  >
     <template #title>{{ title }}</template>
     <template #content>
       <div class="AppEquipmentDialog__option-title">{{ $t('equipment.main_option') }}</div>
@@ -7,7 +12,10 @@
         <EquipmentStat :stat="mainOption" :index="0" @input="updateOption" />
       </div>
       <div class="AppEquipmentDialog__sub-options">
-        <div class="AppEquipmentDialog__option-title">{{ $t('equipment.sub_option') }}</div>
+        <div class="AppEquipmentDialog__option-title">
+          {{ $t('equipment.sub_option') }}
+          <AppButton label="+" color="light-grey" size="small" @click="addSubOption" />
+        </div>
         <div
           class="AppEquipmentDialog__sub-option"
           v-for="(subOption, index) in subOptions"
@@ -27,25 +35,29 @@ export default {
   name: 'EquipmentFormDialog',
   components: { EquipmentStat },
   props: {
-    title: { type: String, required: true }
+    title: { type: String, required: true },
+    equipment: { type: Object, required: true }
   },
   data() {
     return {
-      mainOption: { id: 'attack', value: 67, type: 'percentage' },
-      subOptions: [
-        { id: 'health', value: 375 },
-        { id: 'defense', value: 6, type: 'percentage' },
-        { id: 'critical_hit_damage', value: 13, type: 'percentage' },
-        { id: 'attack', value: 64 }
-      ]
+      mainOption: this.equipment.mainOption || {},
+      subOptions: this.equipment.subOptions || []
     };
   },
   methods: {
+    addSubOption() {
+      if (this.subOptions.length >= 4) return;
+
+      this.subOptions.push({});
+    },
     updateOption(index, newOption) {
       if (index === 0)
         this.mainOption = { ...this.mainOption, ...newOption };
       else
         this.subOptions[index - 1] = { ...this.subOptions[index - 1], ...newOption };
+    },
+    submit() {
+      console.log('submit!');
     }
   }
 };

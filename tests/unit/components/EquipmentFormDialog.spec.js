@@ -5,7 +5,7 @@ describe('EquipmentFormDialog', () => {
   let wrapper;
   beforeEach(() => {
     wrapper = shallowMount(EquipmentFormDialog, {
-      propsData: { title: 'Amazing title' }
+      propsData: { title: 'Amazing title', equipment: {} }
     });
   });
 
