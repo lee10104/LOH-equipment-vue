@@ -1,4 +1,11 @@
+import { equipmentTypeList } from '@/equipment';
 import Equipment from '@/equipment';
+
+describe('equipmentTypeList', () => {
+  it('should work', () => {
+    expect(equipmentTypeList.length).toBe(14);
+  });
+});
 
 describe('Equipment', () => {
   let equipment;
@@ -85,14 +92,16 @@ describe('Equipment', () => {
     });
   });
 
-  describe('updateOptions', () => {
+  describe('update', () => {
     it('should work', () => {
-      equipment.updateOptions(
-        { id: 'speed', value: 11, type: 'number' },
-        [
+      equipment.update({
+        type: 'precision',
+        mainOption: { id: 'speed', value: 11, type: 'number' },
+        subOptions: [
           { id: 'attack', value: 44, type: 'number' }
         ]
-      );
+      });
+      expect(equipment.type).toBe('precision');
       expect(equipment.mainOption).toStrictEqual({ id: 'speed', value: 11, type: 'number' })
       expect(equipment.subOptions).toStrictEqual([
         { id: 'attack', value: 44, type: 'number' }

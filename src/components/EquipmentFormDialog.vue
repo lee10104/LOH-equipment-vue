@@ -7,6 +7,13 @@
   >
     <template #title>{{ title }}</template>
     <template #content>
+      <AppSelect
+        class="AppEquipmentDialog__type"
+        name="type"
+        :value="type"
+        :options="equipmentTypes"
+        @change="updateType"
+      />
       <div class="AppEquipmentDialog__option-title">{{ $t('equipment.main_option') }}</div>
       <div class="AppEquipmentDialog__main-option">
         <EquipmentStat :stat="mainOption" :index="0" @input="updateOption" />
@@ -30,6 +37,7 @@
 
 <script>
 import { isEqual } from '@/lib';
+import { equipmentTypeList } from '@/equipment';
 import Equipment from '@/equipment';
 import EquipmentStat from './EquipmentStat';
 
@@ -42,6 +50,7 @@ export default {
   },
   data() {
     return {
+      type: this.equipment.type,
       mainOption: { ...this.equipment.mainOption },
       subOptions: [ ...this.equipment.subOptions ]
     };
@@ -53,7 +62,11 @@ export default {
       this.subOptions.push({});
     },
     submit() {
-      this.equipment.updateOptions(this.mainOption, this.subOptions);
+      this.equipment.update({
+        type: this.type,
+        mainOption: this.mainOption,
+        subOptions: [ ...this.subOptions ]
+      });
       this.$emit('submit', this.equipment);
     },
     updateOption(index, newOption) {
@@ -62,17 +75,34 @@ export default {
       else
         this.$set(this.subOptions, index - 1, newOption)
     },
+    updateType(type) {
+      this.type = type;
+    }
   },
   computed: {
     disableSubmitButton() {
       return isEqual(this.mainOption, this.equipment.mainOption)
-        && isEqual(this.subOptions, this.equipment.subOptions);
+        && isEqual(this.subOptions, this.equipment.subOptions)
+        && isEqual(this.type, this.equipment.type);
+    },
+    equipmentTypes() {
+      return equipmentTypeList.map(type => ({
+        value: type,
+        label: this.$t(`equipment.type.${type}`)
+      }));
     }
   }
 };
 </script>
 
 <style lang="scss">
+.AppEquipmentDialog__type {
+  top: 25px;
+  right: 30px;
+  position: absolute;
+  height: 34px;
+}
+
 .AppEquipmentDialog__option-title {
   font-weight: 700;
   margin-bottom: 10px;

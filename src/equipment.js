@@ -1,3 +1,5 @@
+export const equipmentTypeList = ['life', 'strength', 'defense', 'precision', 'efficacy', 'resolve', 'frenzy', 'shock', 'leech', 'aegis', 'revenge', 'pierce', 'surge', 'healing'];
+
 class Equipment {
   constructor(data) {
     if (data)
@@ -46,9 +48,8 @@ class Equipment {
     };
   }
 
-  updateOptions(mainOption, subOptions) {
-    this.data.mainOption = mainOption;
-    this.data.subOptions = subOptions;
+  update(newData) {
+    this.data = { ...this.data, ...newData };
   }
 }
 
