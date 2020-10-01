@@ -7,7 +7,7 @@
       </option>
     </select>
     <div class="EquipmentStat__value">
-      <input type="text" class="EquipmentStat__input" :value="stat.value" @input="update('value', $event.target.value)">
+      <input type="text" class="EquipmentStat__input" :value="statForm.value" @input="update('value', $event.target.value)">
       <AppButton
         @click="updateType"
         class="EquipmentStat__button"
@@ -31,29 +31,28 @@ export default {
   data() {
     return {
       selected: this.stat.id || '',
-      type: this.stat.type,
+      statForm: { ...this.stat },
     };
   },
   computed: {
     statIdList: () => statIdList,
     isPercentage() {
-      return this.type === 'percentage';
+      return this.statForm.type === 'percentage';
     }
   },
   methods: {
+    emitInput() {
+      this.$emit('input', this.index, this.statForm );
+    },
     updateType() {
       let newType = '';
       if (this.isPercentage) newType = 'number';
       else newType = 'percentage';
 
-      this.type = newType;
-      this.$emit('input', this.index, { ...this.stat, type: newType });
+      this.statForm = { ...this.statForm, type: newType };
     },
     update(key, value) {
-      const newStat = { ...this.stat };
-      newStat[key] = value;
-
-      this.$emit('input', this.index, newStat);
+      this.statForm = { ...this.statForm, [key]: value };
     }
   }
 };
