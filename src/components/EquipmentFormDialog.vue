@@ -54,7 +54,7 @@ export default {
     },
     submit() {
       this.equipment.updateOptions(this.mainOption, this.subOptions);
-      console.log('submit!');
+      this.$emit('submit', this.equipment);
     },
     updateOption(index, newOption) {
       if (index === 0)

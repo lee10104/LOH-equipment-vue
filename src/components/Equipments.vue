@@ -2,7 +2,7 @@
   <div class="Equipments">
     <div :class="isDialogOpen ? 'Equipments--disabled' : ''">
       <div class="Equipments__header">
-        <AppButton :label="$t('equipment.add')" @click="onOffEquipmentFormDialog(emptyEquipment)"/>
+        <AppButton :label="$t('equipment.add')" @click="onOffEquipmentFormDialog(newEquipment)"/>
         <AppButton :label="$t('warning')" color="red" @click="onOffNoticeDialog" />
       </div>
       <div class="Equipments__container">
@@ -18,6 +18,7 @@
       v-if="showEquipmentFormDialog"
       :title="equipmentFormDialogTitle"
       :equipment="equipment"
+      @submit="updateEquipments"
       @close="onOffEquipmentFormDialog(null)"
     />
     <NoticeDialog v-if="showNoticeDialog" @close="onOffNoticeDialog" />
@@ -37,52 +38,26 @@ export default {
     return {
       isDialogOpen: false,
       equipment: null,
+      equipments: localStorage.equipments ? JSON.parse(localStorage.equipments).map(data => new Equipment(data)) : [],
       showEquipmentFormDialog: false,
-      showNoticeDialog: false,
-      equipmentsData: [
-        {
-          id: 'equipment1',
-          part: 'weapon',
-          type: 'strength',
-          grade: 6,
-          level: 15,
-          mainOption: { id: 'attack', value: 67, type: 'percentage' },
-          subOptions: [
-            { id: 'health', value: 375, type: 'number' },
-            { id: 'defense', value: 6, type: 'percentage' },
-            { id: 'critical_hit_damage', value: 13, type: 'percentage' },
-            { id: 'attack', value: 64 }
-          ]
-        },
-        {
-          id: 'equipment2',
-          part: 'armor',
-          type: 'life',
-          grade: 6,
-          level: 15,
-          mainOption: { id: 'attack', value: 67, type: 'percentage' },
-          subOptions: [
-            { id: 'health', value: 375, type: 'number' },
-            { id: 'defense', value: 6, type: 'percentage' },
-            { id: 'critical_hit_damage', value: 13, type: 'percentage' },
-            { id: 'attack', value: 64 }
-          ]
-        }
-      ]
+      showNoticeDialog: false
     }
   },
   computed: {
-    emptyEquipment() {
-      return new Equipment({});
+    newEquipment() {
+      let id;
+      if (this.equipments.length > 0)
+        id = Number(this.equipments[this.equipments.length - 1].id.split('-')[1]) + 1;
+      else
+        id = 1;
+
+      return new Equipment({ id: 'equipment-' + id });
     },
     equipmentFormDialogTitle() {
       if (Object.keys(this.equipment).length > 0)
         return this.$t('equipment.modify');
       else
         return this.$t('equipment.add');
-    },
-    equipments() {
-      return this.equipmentsData.map(equipmentData => new Equipment(equipmentData));
     }
   },
   methods: {
@@ -94,6 +69,15 @@ export default {
     onOffNoticeDialog() {
       this.isDialogOpen = !this.isDialogOpen;
       this.showNoticeDialog = !this.showNoticeDialog;
+    },
+    updateEquipments() {
+      const existingIds = this.equipments.map(e => e.id);
+      if (!existingIds.includes(this.equipment.id))
+        this.equipments.push(this.equipment);
+
+      localStorage.equipments = JSON.stringify(
+        this.equipments.map(equipment => equipment.format)
+      );
     }
   }
 };
