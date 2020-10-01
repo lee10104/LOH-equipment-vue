@@ -1,13 +1,13 @@
 <template>
   <div class="EquipmentStat">
-    <select name="id" v-model="selected" @input="update('id', $event.target.value)">
-      <option value="">{{ $t('select') }}</option>
-      <option v-for="statId in statIdList" v-bind:key="statId" :value="statId">
-        {{ $t(`stats.${statId}`) }}
-      </option>
-    </select>
+    <AppSelect
+      name="id"
+      :value="this.statForm.id"
+      :options="statIds"
+      @change="updateId"
+    />
     <div class="EquipmentStat__value">
-      <input type="text" class="EquipmentStat__input" :value="statForm.value" @input="update('value', $event.target.value)">
+      <input type="text" class="EquipmentStat__input" :value="statForm.value" @input="updateValue($event.target.value)">
       <AppButton
         @click="updateType"
         class="EquipmentStat__button"
@@ -35,7 +35,12 @@ export default {
     };
   },
   computed: {
-    statIdList: () => statIdList,
+    statIds() {
+      return statIdList.map(id => ({
+        value: id,
+        label: this.$t(`stats.${id}`)
+      }));
+    },
     isPercentage() {
       return this.statForm.type === 'percentage';
     }
@@ -43,6 +48,10 @@ export default {
   methods: {
     updateOption() {
       this.$emit('input', this.index, this.statForm );
+    },
+    updateId(id) {
+      this.statForm = { ...this.statForm, id };
+      this.updateOption();
     },
     updateType() {
       let newType = '';
@@ -52,8 +61,8 @@ export default {
       this.statForm = { ...this.statForm, type: newType };
       this.updateOption();
     },
-    update(key, value) {
-      this.statForm = { ...this.statForm, [key]: value };
+    updateValue(value) {
+      this.statForm = { ...this.statForm, value };
       this.updateOption();
     }
   }
