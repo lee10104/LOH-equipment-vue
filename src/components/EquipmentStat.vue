@@ -41,7 +41,7 @@ export default {
     }
   },
   methods: {
-    emitInput() {
+    updateOption() {
       this.$emit('input', this.index, this.statForm );
     },
     updateType() {
@@ -50,9 +50,11 @@ export default {
       else newType = 'percentage';
 
       this.statForm = { ...this.statForm, type: newType };
+      this.updateOption();
     },
     update(key, value) {
       this.statForm = { ...this.statForm, [key]: value };
+      this.updateOption();
     }
   }
 };

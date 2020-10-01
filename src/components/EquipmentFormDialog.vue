@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import Equipment from '@/equipment';
 import EquipmentStat from './EquipmentStat';
 
 export default {
@@ -36,12 +37,12 @@ export default {
   components: { EquipmentStat },
   props: {
     title: { type: String, required: true },
-    equipment: { type: Object, required: true }
+    equipment: { type: Equipment, required: true }
   },
   data() {
     return {
-      mainOption: this.equipment.mainOption || {},
-      subOptions: this.equipment.subOptions || []
+      mainOption: { ...this.equipment.mainOption },
+      subOptions: [ ...this.equipment.subOptions ]
     };
   },
   methods: {

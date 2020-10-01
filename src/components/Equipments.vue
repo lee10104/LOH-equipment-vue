@@ -2,14 +2,14 @@
   <div class="Equipments">
     <div :class="isDialogOpen ? 'Equipments--disabled' : ''">
       <div class="Equipments__header">
-        <AppButton :label="$t('equipment.add')" @click="onOffEquipmentFormDialog({})"/>
+        <AppButton :label="$t('equipment.add')" @click="onOffEquipmentFormDialog(emptyEquipment)"/>
         <AppButton :label="$t('warning')" color="red" @click="onOffNoticeDialog" />
       </div>
       <div class="Equipments__container">
         <EquipmentSummary
           v-for="equipment in equipments"
           v-bind:key="equipment.id"
-          :equipment-data="equipment"
+          :equipment="equipment"
           @click="onOffEquipmentFormDialog(equipment)"
         />
       </div>
@@ -17,7 +17,7 @@
     <EquipmentFormDialog
       v-if="showEquipmentFormDialog"
       :title="equipmentFormDialogTitle"
-      :equipment="equipmentData"
+      :equipment="equipment"
       @close="onOffEquipmentFormDialog(null)"
     />
     <NoticeDialog v-if="showNoticeDialog" @close="onOffNoticeDialog" />
@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import Equipment from '@/equipment';
 import EquipmentSummary from './EquipmentSummary';
 import EquipmentFormDialog from './EquipmentFormDialog';
 import NoticeDialog from './NoticeDialog';
@@ -35,7 +36,7 @@ export default {
   data() {
     return {
       isDialogOpen: false,
-      equipmentData: null,
+      equipment: null,
       showEquipmentFormDialog: false,
       showNoticeDialog: false,
       equipmentsData: [
@@ -71,19 +72,22 @@ export default {
     }
   },
   computed: {
+    emptyEquipment() {
+      return new Equipment({});
+    },
     equipmentFormDialogTitle() {
-      if (Object.keys(this.equipmentData).length > 0)
+      if (Object.keys(this.equipment).length > 0)
         return this.$t('equipment.modify');
       else
         return this.$t('equipment.add');
     },
     equipments() {
-      return this.equipmentsData;
+      return this.equipmentsData.map(equipmentData => new Equipment(equipmentData));
     }
   },
   methods: {
-    onOffEquipmentFormDialog(equipmentData) {
-      this.equipmentData = equipmentData;
+    onOffEquipmentFormDialog(equipment) {
+      this.equipment = equipment;
       this.isDialogOpen = !this.isDialogOpen;
       this.showEquipmentFormDialog = !this.showEquipmentFormDialog;
     },

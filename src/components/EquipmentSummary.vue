@@ -11,12 +11,7 @@ import Equipment from '@/equipment';
 export default {
   name: 'EquipmentSummary',
   props: {
-    equipmentData: { type: Object, required: true }
-  },
-  computed:{
-    equipment() {
-      return new Equipment(this.equipmentData);
-    }
+    equipment: { type: Equipment, required: true }
   }
 };
 </script>

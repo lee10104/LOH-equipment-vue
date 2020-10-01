@@ -6,6 +6,10 @@ class Equipment {
       this.data = {};
   }
 
+  get id() {
+    return this.data.id;
+  }
+
   get type() {
     return this.data.type;
   }
@@ -23,7 +27,7 @@ class Equipment {
   }
 
   get mainOption() {
-    return this.data.mainOption;
+    return this.data.mainOption || {};
   }
 
   get subOptions() {
