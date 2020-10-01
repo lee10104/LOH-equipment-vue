@@ -28,10 +28,8 @@ export default {
   text-align: center;
   font-size: 15px;
   cursor: pointer;
-
-  & + & {
-    margin-left: 10px;
-  }
+  margin-right: 5px;
+  margin-bottom: 5px;
 }
 
 .EquipmentSummary__type {
