@@ -1,18 +1,25 @@
 <template>
   <div class="Equipments">
-    <div class="Equipments__header">
-      <AppButton :label="$t('equipment.add')" @click="onOffEquipmentFormDialog"/>
-      <AppButton :label="$t('warning')" color="red" @click="onOffNoticeDialog" />
-      <EquipmentFormDialog
-        v-if="showEquipmentFormDialog"
-        :title="$t('equipment.add')"
-        @close="onOffEquipmentFormDialog"
-      />
-      <NoticeDialog v-if="showNoticeDialog" @close="onOffNoticeDialog" />
+    <div :class="isDialogOpen ? 'Equipments--disabled' : ''">
+      <div class="Equipments__header">
+        <AppButton :label="$t('equipment.add')" @click="onOffEquipmentFormDialog({})"/>
+        <AppButton :label="$t('warning')" color="red" @click="onOffNoticeDialog" />
+      </div>
+      <div class="Equipments__container">
+        <Equipment
+          v-for="equipment in equipments"
+          v-bind:key="equipment.id"
+          :equipment-data="equipment"
+          @click="onOffEquipmentFormDialog(equipment)"
+        />
+      </div>
     </div>
-    <div class="Equipments__container">
-      <Equipment v-for="equipment in equipments" v-bind:key="equipment.id" :equipment-data="equipment" />
-    </div>
+    <EquipmentFormDialog
+      v-if="showEquipmentFormDialog"
+      :title="equipmentFormDialogTitle"
+      @close="onOffEquipmentFormDialog(null)"
+    />
+    <NoticeDialog v-if="showNoticeDialog" @close="onOffNoticeDialog" />
   </div>
 </template>
 
@@ -26,6 +33,8 @@ export default {
   components: { Equipment, EquipmentFormDialog, NoticeDialog },
   data() {
     return {
+      isDialogOpen: false,
+      equipmentData: null,
       showEquipmentFormDialog: false,
       showNoticeDialog: false,
       equipmentsData: [
@@ -61,15 +70,24 @@ export default {
     }
   },
   computed: {
+    equipmentFormDialogTitle() {
+      if (Object.keys(this.equipmentData).length > 0)
+        return this.$t('equipment.modify');
+      else
+        return this.$t('equipment.add');
+    },
     equipments() {
       return this.equipmentsData;
     }
   },
   methods: {
-    onOffEquipmentFormDialog() {
+    onOffEquipmentFormDialog(equipmentData) {
+      this.equipmentData = equipmentData;
+      this.isDialogOpen = !this.isDialogOpen;
       this.showEquipmentFormDialog = !this.showEquipmentFormDialog;
     },
     onOffNoticeDialog() {
+      this.isDialogOpen = !this.isDialogOpen;
       this.showNoticeDialog = !this.showNoticeDialog;
     }
   }
@@ -79,6 +97,10 @@ export default {
 <style lang="scss">
 .Equipments {
   margin-top: 10px;
+}
+
+.Equipments--disabled {
+  pointer-events: none;
 }
 
 .Equipments__container {

@@ -1,5 +1,5 @@
 <template>
-  <div class="Equipment">
+  <div class="Equipment" @click="$emit('click')">
     {{ equipment.grade }}⭐ +{{ equipment.level }}
     <div class="Equipment__type">{{ $t(`equipment.type.${equipment.type}`) }}</div>
   </div>
@@ -32,6 +32,7 @@ export default {
   padding: 10px;
   text-align: center;
   font-size: 15px;
+  cursor: pointer;
 
   & + & {
     margin-left: 10px;
