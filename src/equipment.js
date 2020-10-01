@@ -33,6 +33,11 @@ class Equipment {
   get subOptions() {
     return this.data.subOptions || [];
   }
+
+  updateOptions(mainOption, subOptions) {
+    this.data.mainOption = mainOption;
+    this.data.subOptions = subOptions;
+  }
 }
 
 export default Equipment;

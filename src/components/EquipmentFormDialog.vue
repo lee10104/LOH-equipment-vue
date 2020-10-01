@@ -1,6 +1,6 @@
 <template>
   <AppDialog
-    :disable-submit-button="true"
+    :disable-submit-button="disableSubmitButton"
     :show-submit-button="true"
     @submit="submit"
     @close="$emit('close')"
@@ -29,6 +29,7 @@
 </template>
 
 <script>
+import { isEqual } from '@/lib';
 import Equipment from '@/equipment';
 import EquipmentStat from './EquipmentStat';
 
@@ -51,14 +52,21 @@ export default {
 
       this.subOptions.push({});
     },
+    submit() {
+      this.equipment.updateOptions(this.mainOption, this.subOptions);
+      console.log('submit!');
+    },
     updateOption(index, newOption) {
       if (index === 0)
         this.mainOption = { ...this.mainOption, ...newOption };
       else
-        this.subOptions[index - 1] = { ...this.subOptions[index - 1], ...newOption };
+        this.$set(this.subOptions, index - 1, newOption)
     },
-    submit() {
-      console.log('submit!');
+  },
+  computed: {
+    disableSubmitButton() {
+      return isEqual(this.mainOption, this.equipment.mainOption)
+        && isEqual(this.subOptions, this.equipment.subOptions);
     }
   }
 };
