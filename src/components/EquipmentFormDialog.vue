@@ -19,7 +19,7 @@
         <div
           class="AppEquipmentDialog__sub-option"
           v-for="(subOption, index) in subOptions"
-          v-bind:key="subOption.id"
+          v-bind:key="index"
         >
           <EquipmentStat :stat="subOption" :index="index + 1" @input="updateOption" />
         </div>
