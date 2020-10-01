@@ -1,0 +1,23 @@
+{
+  "equipment": {
+    "add": "장비 추가",
+    "main_option": "주옵션",
+    "sub_option": "부옵션",
+    "type": {
+      "life": "생명셋",
+      "strength": "공격셋",
+      "defense": "방어셋",
+      "precision": "치명셋",
+      "efficacy": "명중셋",
+      "resolve": "신념셋",
+      "frenzy": "맹렬셋",
+      "shock": "충격셋",
+      "leech": "흡혈셋",
+      "aegis": "수호셋",
+      "revenge": "반격셋",
+      "pierce": "관통셋",
+      "surge": "증폭셋",
+      "healing": "회복셋"
+    }
+  }
+}

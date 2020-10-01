@@ -1,0 +1,34 @@
+class Equipment {
+  constructor(data) {
+    if (data)
+      this.data = data;
+    else
+      this.data = {};
+  }
+
+  get type() {
+    return this.data.type;
+  }
+
+  get part() {
+    return this.data.part;
+  }
+
+  get grade() {
+    return this.data.grade;
+  }
+
+  get level() {
+    return this.data.level;
+  }
+
+  get mainOption() {
+    return this.data.mainOption;
+  }
+
+  get subOptions() {
+    return this.data.subOptions || [];
+  }
+}
+
+export default Equipment;
