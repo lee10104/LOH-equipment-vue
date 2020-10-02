@@ -2,7 +2,7 @@
   <div class="Conditions">
     <div class="Conditions__title">
       {{ $t('calculator') }}
-      <AppButton label="+" color="light-grey" size="small" />
+      <AppButton label="+" color="light-grey" size="small" @click="addCondition" />
       <AppButton :label="$t('calculate')" color="red" />
     </div>
     <Condition v-for="(condition, index) in conditions" v-bind:key="index" :condition="condition" />
@@ -17,19 +17,13 @@ export default {
   components: { Condition },
   data() {
     return {
-      conditions: [
-        {
-          statId: 'health',
-          type: 'lt',
-          value: 500
-        },
-        {
-          statId: 'critical_hit_damage',
-          type: 'gte',
-          value: 90
-        }
-      ]
+      conditions: []
     };
+  },
+  methods: {
+    addCondition() {
+      this.conditions.push({});
+    }
   }
 };
 </script>
@@ -38,6 +32,7 @@ export default {
 .Conditions {
   width: calc(70% - 10px);
   height: 400px;
+  overflow: auto;
 }
 
 .Conditions__title {
