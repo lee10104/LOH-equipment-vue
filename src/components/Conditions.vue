@@ -1,6 +1,6 @@
 <template>
-  <div class="StatsCondition">
-    <div class="StatsCondition__title">
+  <div class="Conditions">
+    <div class="Conditions__title">
       {{ $t('calculator') }}
       <AppButton label="+" color="light-grey" size="small" />
       <AppButton :label="$t('calculate')" color="red" />
@@ -9,16 +9,16 @@
 </template>
 
 <script>
-export default { name: 'StatsCondition' };
+export default { name: 'Conditions' };
 </script>
 
 <style lang="scss">
-.StatsCondition {
+.Conditions {
   width: calc(70% - 10px);
   height: 400px;
 }
 
-.StatsCondition__title {
+.Conditions__title {
   font-size: 20px;
   font-weight: 700;
 }

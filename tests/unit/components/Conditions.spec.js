@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
-import StatsCondition from '@/components/StatsCondition.vue';
+import Conditions from '@/components/Conditions.vue';
 
-describe('StatsCondition', () => {
+describe('Conditions', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(StatsCondition);
+    wrapper = shallowMount(Conditions);
   });
 
   it('should work', () => {

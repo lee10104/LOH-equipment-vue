@@ -2,7 +2,7 @@
   <div :class="['App', isDialogOpen ? 'App--disabled' : '']">
     <div class="App__body">
       <HeroInfo class="App__component" />
-      <StatsCondition class="App__component" />
+      <Conditions class="App__component" />
     </div>
     <Equipments @open-dialog="disableClick" class="App__component" />
   </div>
@@ -10,14 +10,14 @@
 
 <script>
 import HeroInfo from './components/HeroInfo.vue'
-import StatsCondition from './components/StatsCondition.vue'
+import Conditions from './components/Conditions.vue'
 import Equipments from './components/Equipments.vue'
 
 export default {
   name: 'App',
   components: {
     HeroInfo,
-    StatsCondition,
+    Conditions,
     Equipments
   },
   data() {
