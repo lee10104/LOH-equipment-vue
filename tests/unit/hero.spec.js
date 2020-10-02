@@ -1,4 +1,17 @@
+import { heroIdList, heroTypeList } from '@/hero';
 import Hero from '@/hero';
+
+describe('heroIdList', () => {
+  it('should work', () => {
+    expect(heroIdList.length).toBeGreaterThan(0);
+  });
+});
+
+describe('heroTypeList', () => {
+  it('should work', () => {
+    expect(heroTypeList.length).toBe(5);
+  });
+});
 
 describe('Hero', () => {
   let hero;

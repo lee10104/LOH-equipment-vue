@@ -1,26 +1,49 @@
 <template>
   <div class="HeroInfo">
-    <div class="HeroInfo__name">[{{ heroTypeName }}] {{ heroName }}</div>
-    <div class="HeroInfo__stats">
+    <div class="HeroInfo__name">
+      <AppSelect name="type" :options="heroTypes" :value="heroType" @change="updateType" />
+      <AppSelect name="id" :options="heroIds" :value="id" @change="updateId" />
+    </div>
+    <div v-if="stats" class="HeroInfo__stats">
       <div v-for="stat in stats" v-bind:key="stat.id" class="HeroInfo__stat">
         {{ $t(`stats.${stat.id}`) }}
         <div class="HeroInfo__stat-value">{{ stat.value }}<span v-if="stat.type == 'percentage'">%</span></div>
       </div>
     </div>
+    <div v-else class="HeroInfo__stats">
+      {{ $t('no_data') }}
+    </div>
   </div>
 </template>
 
 <script>
+import { heroIdList, heroTypeList } from '@/hero';
 import Hero from '@/hero';
 
 export default {
   name: 'HeroInfo',
   data() {
-    return { id: 'helga', heroType: 'water' };
+    return { id: '', heroType: '' };
   },
   computed: {
+    heroIds() {
+      return heroIdList.map(id => ({
+        value: id,
+        label: this.$t(`heroes.name.${id}`)
+      }));
+    },
+    heroTypes() {
+      return heroTypeList.map(type => ({
+        value: type,
+        label: this.$t(`heroes.type.${type}`)
+      }));
+    },
     hero() {
-      return new Hero(this.id, this.heroType);
+      try {
+        return new Hero(this.id, this.heroType);
+      } catch {
+        return null;
+      }
     },
     stats() {
       if (this.hero === null)
@@ -33,6 +56,14 @@ export default {
     },
     heroName() {
       return this.$t(`heroes.name.${this.id}`);
+    }
+  },
+  methods: {
+    updateId(id) {
+      this.id = id;
+    },
+    updateType(type) {
+      this.heroType = type;
     }
   }
 };
