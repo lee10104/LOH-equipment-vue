@@ -15,37 +15,20 @@
           @update="updateCondition"
         />
       </div>
-      <div class="Calculator__results">
-        <div class="Calculator__result-title">장비셋1</div>
-        <div class="Calculator__result">
-          <EquipmentSummary
-            v-for="equipment in equipments"
-            v-bind:key="equipment.id"
-            :equipment="equipment"
-          />
-        </div>
-        <div class="Calculator__result-title">장비셋2</div>
-        <div class="Calculator__result">
-          <EquipmentSummary
-            v-for="equipment in equipments"
-            v-bind:key="equipment.id"
-            :equipment="equipment"
-          />
-        </div>
-      </div>
+      <div class="Calculator__results" />
     </div>
   </div>
 </template>
 
 <script>
 import Hero from '@/hero';
-import Equipment from '@/equipment';
+// import Equipment from '@/equipment';
 import Condition from './Condition';
-import EquipmentSummary from './EquipmentSummary';
+// import EquipmentSummary from './EquipmentSummary';
 
 export default {
   name: 'Calculator',
-  components: { Condition, EquipmentSummary },
+  components: { Condition },
   props: {
     hero: {
       required: true,
@@ -53,10 +36,7 @@ export default {
     }
   },
   data() {
-    return {
-      conditions: [],
-      equipments: localStorage.equipments ? JSON.parse(localStorage.equipments).map(data => new Equipment(data)) : [],
-    };
+    return { conditions: [] };
   },
   methods: {
     addCondition() {

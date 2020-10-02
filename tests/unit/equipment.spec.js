@@ -22,25 +22,27 @@ describe('equipmentPartList', () => {
 describe('Equipment', () => {
   let equipment;
   beforeEach(() => {
-    equipment = new Equipment({
-      id: 'equipment1',
-      part: 'weapon',
-      type: 'strength',
-      grade: 6,
-      level: 15,
-      mainOption: { id: 'attack', value: 67, type: 'percentage' },
-      subOptions: [
-        { id: 'health', value: 375, type: 'number' },
-        { id: 'defense', value: 6, type: 'percentage' },
-        { id: 'critical_hit_damage', value: 13, type: 'percentage' },
-        { id: 'attack', value: 64 }
-      ]
-    });
+    equipment = new Equipment(
+      1,
+      {
+        part: 'weapon',
+        type: 'strength',
+        grade: 6,
+        level: 15,
+        mainOption: { id: 'attack', value: 67, type: 'percentage' },
+        subOptions: [
+          { id: 'health', value: 375, type: 'number' },
+          { id: 'defense', value: 6, type: 'percentage' },
+          { id: 'critical_hit_damage', value: 13, type: 'percentage' },
+          { id: 'attack', value: 64 }
+        ]
+      }
+    );
   });
 
   describe('id', () => {
     it('should work', () => {
-      expect(equipment.id).toBe('equipment1');
+      expect(equipment.id).toBe(1);
     });
   });
 
@@ -88,7 +90,6 @@ describe('Equipment', () => {
   describe('format', () => {
     it('should work', () => {
       expect(equipment.format).toStrictEqual({
-        id: 'equipment1',
         part: 'weapon',
         type: 'strength',
         grade: 6,

@@ -36,20 +36,24 @@ export default {
     return {
       isDialogOpen: false,
       equipment: null,
-      equipments: localStorage.equipments ? JSON.parse(localStorage.equipments).map(data => new Equipment(data)) : [],
+      equipments: [],
       showEquipmentFormDialog: false,
       showNoticeDialog: false
     }
+  },
+  mounted() {
+    const equipmentData = localStorage.equipments ? JSON.parse(localStorage.equipments) : {};
+    this.equipments = Object.keys(equipmentData).map(id => new Equipment(id, equipmentData[id]));
   },
   computed: {
     newEquipment() {
       let id;
       if (this.equipments.length > 0)
-        id = Number(this.equipments[this.equipments.length - 1].id.split('-')[1]) + 1;
+        id = Number(this.equipments[this.equipments.length - 1].id) + 1;
       else
         id = 1;
 
-      return new Equipment({ id: 'equipment-' + id });
+      return new Equipment(id, {});
     },
     equipmentFormDialogTitle() {
       if (Object.keys(this.equipment.mainOption).length > 0)
@@ -77,9 +81,11 @@ export default {
       if (!existingIds.includes(this.equipment.id))
         this.equipments.push(this.equipment);
 
-      localStorage.equipments = JSON.stringify(
-        this.equipments.map(equipment => equipment.format)
-      );
+      const result = {};
+      this.equipments.forEach(equipment => {
+        result[equipment.id] = equipment.format;
+      });
+      localStorage.equipments = JSON.stringify(result);
     }
   }
 };

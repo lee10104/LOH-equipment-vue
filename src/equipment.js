@@ -13,11 +13,11 @@ export const equipmentTypeInfos = {
 export const equipmentPartList = ['weapon', 'armor', 'gloves', 'shoes', 'ring', 'necklace'];
 
 class Equipment {
-  constructor(data) {
+  constructor(id, data) {
     if (data)
-      this.data = data;
+      this.data = { ...data, id };
     else
-      this.data = {};
+      this.data = { id };
   }
 
   get id() {
@@ -50,7 +50,6 @@ class Equipment {
 
   get format() {
     return {
-      id: this.id,
       type: this.type,
       part: this.part,
       grade: this.grade,
