@@ -46,6 +46,7 @@ export default {
 
 .App__body {
   width: 100%;
+  display: flex;
 }
 
 .App__component {

@@ -38,6 +38,8 @@ export default {
   line-height: 1;
   cursor: pointer;
   background-color: #424244;
+  vertical-align: top;
+  height: 34px;
 
   & + & {
     margin-left: 10px;
@@ -54,9 +56,7 @@ export default {
 
   &--small {
     padding: 0;
-    height: 34px;
     width: 34px;
-    vertical-align: top;
   }
 
   &--disabled {
