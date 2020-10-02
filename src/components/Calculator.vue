@@ -1,6 +1,6 @@
 <template>
-  <div class="Conditions">
-    <div class="Conditions__title">
+  <div class="Calculator">
+    <div class="Calculator__title">
       {{ $t('calculator') }}
       <AppButton label="+" color="light-grey" size="small" @click="addCondition" />
       <AppButton :label="$t('calculate')" color="red" />
@@ -19,7 +19,7 @@
 import Condition from './Condition';
 
 export default {
-  name: 'Conditions',
+  name: 'Calculator',
   components: { Condition },
   data() {
     return {
@@ -38,13 +38,13 @@ export default {
 </script>
 
 <style lang="scss">
-.Conditions {
+.Calculator {
   width: calc(70% - 10px);
   height: 400px;
   overflow: auto;
 }
 
-.Conditions__title {
+.Calculator__title {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;

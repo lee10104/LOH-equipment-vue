@@ -1,10 +1,10 @@
 import { shallowMount } from '@vue/test-utils';
-import Conditions from '@/components/Conditions.vue';
+import Calculator from '@/components/Calculator.vue';
 
-describe('Conditions', () => {
+describe('Calculator', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(Conditions);
+    wrapper = shallowMount(Calculator);
   });
 
   it('should work', () => {
