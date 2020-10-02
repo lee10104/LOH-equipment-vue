@@ -52,7 +52,7 @@ export default {
       return new Equipment({ id: 'equipment-' + id });
     },
     equipmentFormDialogTitle() {
-      if (Object.keys(this.equipment).length > 0)
+      if (Object.keys(this.equipment.mainOption).length > 0)
         return this.$t('equipment.modify');
       else
         return this.$t('equipment.add');
