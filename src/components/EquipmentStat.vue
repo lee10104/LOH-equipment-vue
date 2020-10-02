@@ -7,7 +7,7 @@
       @change="updateId"
     />
     <div class="EquipmentStat__value">
-      <input type="text" class="EquipmentStat__input" :value="statForm.value" @input="updateValue($event.target.value)">
+      <AppInput :value="statForm.value" @input="updateValue" />
       <AppButton
         @click="updateType"
         class="EquipmentStat__button"
