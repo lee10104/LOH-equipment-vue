@@ -44,6 +44,8 @@ export default {
   mounted() {
     const equipmentData = localStorage.equipments ? JSON.parse(localStorage.equipments) : {};
     this.equipments = Object.keys(equipmentData).map(id => new Equipment(id, equipmentData[id]));
+
+    this.$emit('update', this.equipments);
   },
   computed: {
     newEquipment() {
@@ -86,6 +88,8 @@ export default {
         result[equipment.id] = equipment.format;
       });
       localStorage.equipments = JSON.stringify(result);
+
+      this.$emit('update', this.equipments);
     }
   }
 };

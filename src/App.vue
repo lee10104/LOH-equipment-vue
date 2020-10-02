@@ -2,9 +2,9 @@
   <div :class="['App', isDialogOpen ? 'App--disabled' : '']">
     <div class="App__body">
       <HeroInfo class="App__component" @change="updateHero"/>
-      <Calculator class="App__component" :hero="hero" />
+      <Calculator class="App__component" :hero="hero" :equipments="equipments" />
     </div>
-    <Equipments @open-dialog="disableClick" class="App__component" />
+    <Equipments @open-dialog="disableClick" @update="updateEquipments" class="App__component" />
   </div>
 </template>
 
@@ -23,6 +23,7 @@ export default {
   data() {
     return {
       isDialogOpen: false,
+      equipments: [],
       hero: null
     };
   },
@@ -32,6 +33,9 @@ export default {
     },
     updateHero(hero) {
       this.hero = hero;
+    },
+    updateEquipments(equipments) {
+      this.equipments = equipments;
     }
   }
 }

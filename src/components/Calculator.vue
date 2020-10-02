@@ -30,6 +30,7 @@ export default {
   name: 'Calculator',
   components: { Condition },
   props: {
+    equipments: { type: Array, required: true },
     hero: {
       required: true,
       validator: v => v === null || v instanceof Hero
