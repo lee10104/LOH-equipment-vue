@@ -6,6 +6,10 @@ class Hero {
     this.heroStats = heroes[id][type];
   }
 
+  get rawStats() {
+    return this.heroStats;
+  }
+
   get stats() {
     return Object.keys(this.heroStats).map(id => (
       { id, value: this.heroStats[id], type: getBaseType(id) }

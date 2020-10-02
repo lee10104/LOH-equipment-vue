@@ -1,9 +1,15 @@
-import { equipmentPartList, equipmentTypeList } from '@/equipment';
+import { equipmentPartList, equipmentTypeList, equipmentTypeInfos } from '@/equipment';
 import Equipment from '@/equipment';
 
 describe('equipmentTypeList', () => {
   it('should work', () => {
     expect(equipmentTypeList.length).toBe(14);
+  });
+});
+
+describe('equipmentTypeInfos', () => {
+  it('should work', () => {
+    expect(Object.keys(equipmentTypeInfos).length).toBe(7);
   });
 });
 
