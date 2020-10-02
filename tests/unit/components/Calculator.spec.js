@@ -4,7 +4,9 @@ import Calculator from '@/components/Calculator.vue';
 describe('Calculator', () => {
   let wrapper;
   beforeEach(() => {
-    wrapper = shallowMount(Calculator);
+    wrapper = shallowMount(Calculator, {
+      propsData: { hero: null }
+    });
   });
 
   it('should work', () => {

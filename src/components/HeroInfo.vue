@@ -39,11 +39,15 @@ export default {
       }));
     },
     hero() {
+      let hero;
       try {
-        return new Hero(this.id, this.heroType);
+        hero = new Hero(this.id, this.heroType);
       } catch {
-        return null;
+        hero = null;
       }
+
+      this.$emit('change', hero);
+      return hero;
     },
     stats() {
       if (this.hero === null)

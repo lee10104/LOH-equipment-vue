@@ -38,13 +38,20 @@
 </template>
 
 <script>
-import Condition from './Condition';
+import Hero from '@/hero';
 import Equipment from '@/equipment';
+import Condition from './Condition';
 import EquipmentSummary from './EquipmentSummary';
 
 export default {
   name: 'Calculator',
   components: { Condition, EquipmentSummary },
+  props: {
+    hero: {
+      required: true,
+      validator: v => v === null || v instanceof Hero
+    }
+  },
   data() {
     return {
       conditions: [],

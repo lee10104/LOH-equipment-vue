@@ -1,8 +1,8 @@
 <template>
   <div :class="['App', isDialogOpen ? 'App--disabled' : '']">
     <div class="App__body">
-      <HeroInfo class="App__component" />
-      <Calculator class="App__component" />
+      <HeroInfo class="App__component" @change="updateHero"/>
+      <Calculator class="App__component" :hero="hero" />
     </div>
     <Equipments @open-dialog="disableClick" class="App__component" />
   </div>
@@ -21,11 +21,17 @@ export default {
     Equipments
   },
   data() {
-    return { isDialogOpen: false };
+    return {
+      isDialogOpen: false,
+      hero: null
+    };
   },
   methods: {
     disableClick() {
       this.isDialogOpen = !this.isDialogOpen;
+    },
+    updateHero(hero) {
+      this.hero = hero;
     }
   }
 }
