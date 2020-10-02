@@ -1,5 +1,5 @@
 <template>
-  <select :name="name" v-model="selected" @change="$emit('change', selected)">
+  <select class="AppSelect" :name="name" v-model="selected" @change="$emit('change', selected)">
     <option value="">{{ $t('select') }}</option>
     <option v-for="(option, index) in options" v-bind:key="index" :value="option.value">
       {{ option.label }}
@@ -20,3 +20,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+.AppSelect {
+  height: 34px;
+}
+</style>

@@ -2,7 +2,7 @@
   <div class="EquipmentStat">
     <AppSelect
       name="id"
-      :value="this.statForm.id"
+      :value="statForm.id"
       :options="statIds"
       @change="updateId"
     />
