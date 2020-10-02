@@ -19,17 +19,15 @@ class Calculator {
       this.stats = this.stats.concat(equipment.subOptions);
     });
 
-    Object.keys(equippedNumber).forEach(key => {
+    for (let key in equippedNumber) {
       const equipmentTypeInfo = equipmentTypeInfos[key];
-      if (!equipmentTypeInfo) return;
+      if (!equipmentTypeInfo) continue;
 
       const setNumber = ~~(equippedNumber[key] / equipmentTypeInfo.number);
 
       for (let i = 0; i < setNumber; i++)
-        this.stats.push(
-          { id: equipmentTypeInfo.statId, value: equipmentTypeInfo.value, type: 'percentage' }
-        );
-    });
+        this.stats.push({ id: equipmentTypeInfo.statId, value: equipmentTypeInfo.value, type: 'percentage' });
+    }
 
     const result = {};
     statIdList.map(id => (result[id] = 0));
@@ -40,9 +38,9 @@ class Calculator {
         result[stat.id] += stat.value;
     });
 
-    Object.keys(result).forEach(key => {
+    for (let key in result) {
       result[key] = Math.ceil(result[key]);
-    });
+    }
     return result;
   }
 }
