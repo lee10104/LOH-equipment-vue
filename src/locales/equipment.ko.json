@@ -4,6 +4,14 @@
     "modify": "장비 수정",
     "main_option": "주옵션",
     "sub_option": "부옵션",
+    "part": {
+      "weapon": "무기",
+      "armor": "갑옷",
+      "gloves": "장갑",
+      "shoes": "신발",
+      "ring": "반지",
+      "necklace": "목걸이"
+    },
     "type": {
       "life": "생명셋",
       "strength": "공격셋",

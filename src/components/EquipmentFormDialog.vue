@@ -7,13 +7,10 @@
   >
     <template #title>{{ title }}</template>
     <template #content>
-      <AppSelect
-        class="AppEquipmentDialog__type"
-        name="type"
-        :value="type"
-        :options="equipmentTypes"
-        @change="updateType"
-      />
+      <div class="AppEquipmentDialog__select-header">
+        <AppSelect name="type" :value="type" :options="equipmentTypes" @change="updateType" />
+        <AppSelect name="part" :value="part" :options="equipmentParts" @change="updatePart" />
+      </div>
       <div class="AppEquipmentDialog__option-title">{{ $t('equipment.main_option') }}</div>
       <div class="AppEquipmentDialog__main-option">
         <EquipmentStat :stat="mainOption" :index="0" @input="updateOption" />
@@ -37,7 +34,7 @@
 
 <script>
 import { isEqual } from '@/lib';
-import { equipmentTypeList } from '@/equipment';
+import { equipmentPartList, equipmentTypeList } from '@/equipment';
 import Equipment from '@/equipment';
 import EquipmentStat from './EquipmentStat';
 
@@ -50,6 +47,7 @@ export default {
   },
   data() {
     return {
+      part: this.equipment.part,
       type: this.equipment.type,
       mainOption: { ...this.equipment.mainOption },
       subOptions: [ ...this.equipment.subOptions ]
@@ -64,6 +62,7 @@ export default {
     submit() {
       this.equipment.update({
         type: this.type,
+        part: this.part,
         mainOption: this.mainOption,
         subOptions: [ ...this.subOptions ]
       });
@@ -75,6 +74,9 @@ export default {
       else
         this.$set(this.subOptions, index - 1, newOption)
     },
+    updatePart(part) {
+      this.part = part;
+    },
     updateType(type) {
       this.type = type;
     }
@@ -83,7 +85,14 @@ export default {
     disableSubmitButton() {
       return isEqual(this.mainOption, this.equipment.mainOption)
         && isEqual(this.subOptions, this.equipment.subOptions)
-        && isEqual(this.type, this.equipment.type);
+        && isEqual(this.type, this.equipment.type)
+        && isEqual(this.part, this.equipment.part);
+    },
+    equipmentParts() {
+      return equipmentPartList.map(part => ({
+        value: part,
+        label: this.$t(`equipment.part.${part}`)
+      }));
     },
     equipmentTypes() {
       return equipmentTypeList.map(type => ({
@@ -96,11 +105,18 @@ export default {
 </script>
 
 <style lang="scss">
-.AppEquipmentDialog__type {
+.AppEquipmentDialog__select-header {
+  position: absolute;
   top: 25px;
   right: 30px;
-  position: absolute;
-  height: 34px;
+
+  > select {
+    height: 34px;
+
+    + select {
+      margin-left: 10px;
+    }
+  }
 }
 
 .AppEquipmentDialog__option-title {

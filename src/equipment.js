@@ -1,5 +1,7 @@
 export const equipmentTypeList = ['life', 'strength', 'defense', 'precision', 'efficacy', 'resolve', 'frenzy', 'shock', 'leech', 'aegis', 'revenge', 'pierce', 'surge', 'healing'];
 
+export const equipmentPartList = ['weapon', 'armor', 'gloves', 'shoes', 'ring', 'necklace'];
+
 class Equipment {
   constructor(data) {
     if (data)
