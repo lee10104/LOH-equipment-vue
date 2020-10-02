@@ -1,10 +1,10 @@
 <template>
-  <div class="App">
+  <div :class="['App', isDialogOpen ? 'App--disabled' : '']">
     <div class="App__body">
       <HeroInfo class="App__component" />
       <StatsCondition class="App__component" />
     </div>
-    <Equipments class="App__component" />
+    <Equipments @open-dialog="disableClick" class="App__component" />
   </div>
 </template>
 
@@ -19,6 +19,14 @@ export default {
     HeroInfo,
     StatsCondition,
     Equipments
+  },
+  data() {
+    return { isDialogOpen: false };
+  },
+  methods: {
+    disableClick() {
+      this.isDialogOpen = !this.isDialogOpen;
+    }
   }
 }
 </script>
@@ -30,6 +38,10 @@ export default {
   margin: 30px 20px;
   font-family: 'NotoSansCJKkr';
   color: #424244;
+}
+
+.App--disabled {
+  pointer-events: none;
 }
 
 .App__body {

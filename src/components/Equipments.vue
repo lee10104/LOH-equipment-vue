@@ -1,18 +1,16 @@
 <template>
   <div class="Equipments">
-    <div :class="isDialogOpen ? 'Equipments--disabled' : ''">
-      <div class="Equipments__header">
-        <AppButton :label="$t('equipment.add')" @click="onOffEquipmentFormDialog(newEquipment)"/>
-        <AppButton :label="$t('warning')" color="red" @click="onOffNoticeDialog" />
-      </div>
-      <div class="Equipments__container">
-        <EquipmentSummary
-          v-for="equipment in equipments"
-          v-bind:key="equipment.id"
-          :equipment="equipment"
-          @click="onOffEquipmentFormDialog(equipment)"
-        />
-      </div>
+    <div class="Equipments__header">
+      <AppButton :label="$t('equipment.add')" @click="onOffEquipmentFormDialog(newEquipment)"/>
+      <AppButton :label="$t('warning')" color="red" @click="onOffNoticeDialog" />
+    </div>
+    <div class="Equipments__container">
+      <EquipmentSummary
+        v-for="equipment in equipments"
+        v-bind:key="equipment.id"
+        :equipment="equipment"
+        @click="onOffEquipmentFormDialog(equipment)"
+      />
     </div>
     <EquipmentFormDialog
       v-if="showEquipmentFormDialog"
@@ -65,10 +63,14 @@ export default {
       this.equipment = equipment;
       this.isDialogOpen = !this.isDialogOpen;
       this.showEquipmentFormDialog = !this.showEquipmentFormDialog;
+
+      this.$emit('open-dialog', this.isDialogOpen);
     },
     onOffNoticeDialog() {
       this.isDialogOpen = !this.isDialogOpen;
       this.showNoticeDialog = !this.showNoticeDialog;
+
+      this.$emit('open-dialog', this.isDialogOpen);
     },
     updateEquipments() {
       const existingIds = this.equipments.map(e => e.id);
@@ -86,10 +88,6 @@ export default {
 <style lang="scss">
 .Equipments {
   margin-top: 10px;
-}
-
-.Equipments--disabled {
-  pointer-events: none;
 }
 
 .Equipments__container {

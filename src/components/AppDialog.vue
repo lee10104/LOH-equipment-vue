@@ -38,6 +38,7 @@ export default {
   background-color: white;
   width: 512px;
   height: 512px;
+  pointer-events: auto;
 }
 
 .AppDialog__title {
