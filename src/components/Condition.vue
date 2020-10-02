@@ -54,7 +54,7 @@ export default {
 <style lang="scss">
 .Condition {
   height: 34px;
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .Condition__element {
