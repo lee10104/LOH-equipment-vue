@@ -41,7 +41,7 @@ export default {
 <style lang="scss">
 .HeroInfo {
   width: 30%;
-  height: 400px;
+  height: 364px;
 }
 
 .HeroInfo__name {

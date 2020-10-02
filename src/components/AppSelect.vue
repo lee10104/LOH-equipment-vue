@@ -24,5 +24,9 @@ export default {
 <style lang="scss">
 .AppSelect {
   height: 34px;
+
+  & + & {
+    margin-left: 10px;
+  }
 }
 </style>

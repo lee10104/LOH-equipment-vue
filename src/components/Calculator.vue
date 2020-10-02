@@ -65,7 +65,7 @@ export default {
 <style lang="scss">
 .Calculator {
   width: calc(70% - 10px);
-  height: 400px;
+  height: 364px;
   overflow: auto;
 }
 

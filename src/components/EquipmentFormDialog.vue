@@ -109,14 +109,6 @@ export default {
   position: absolute;
   top: 25px;
   right: 30px;
-
-  > select {
-    height: 34px;
-
-    + select {
-      margin-left: 10px;
-    }
-  }
 }
 
 .AppEquipmentDialog__option-title {
