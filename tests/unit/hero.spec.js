@@ -19,6 +19,12 @@ describe('Hero', () => {
     hero = new Hero('helga', 'water');
   });
 
+  describe('class', () => {
+    it('should work', () => {
+      expect(hero.class).toBe('striker');
+    });
+  });
+
   describe('rawStats', () => {
     it('should work', () => {
       expect(hero.rawStats).toStrictEqual({

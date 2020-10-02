@@ -9,7 +9,12 @@ class Hero {
     if (!heroes[id] || !heroes[id][type])
       throw 'no data';
 
-    this.heroStats = heroes[id][type];
+    this.heroClass = heroes[id][type]['class'];
+    this.heroStats = heroes[id][type]['stats'];
+  }
+
+  get class() {
+    return this.heroClass;
   }
 
   get rawStats() {

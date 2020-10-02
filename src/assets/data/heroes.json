@@ -1,34 +1,43 @@
 {
   "helga": {
     "darkness": {
-      "health": 10526,
-      "attack": 994,
-      "defense": 749,
-      "speed": 100,
-      "critical_hit_rate": 10,
-      "critical_hit_damage": 80,
-      "debuff_rate": 0,
-      "resistance": 5
+      "class": "warrior",
+      "stats": {
+        "health": 10526,
+        "attack": 994,
+        "defense": 749,
+        "speed": 100,
+        "critical_hit_rate": 10,
+        "critical_hit_damage": 80,
+        "debuff_rate": 0,
+        "resistance": 5
+      }
     },
     "fire": {
-      "health": 6456,
-      "attack": 985,
-      "defense": 985,
-      "speed": 99,
-      "critical_hit_rate": 10,
-      "critical_hit_damage": 50,
-      "debuff_rate": 10,
-      "resistance": 25
+      "class": "warrior",
+      "stats": {
+        "health": 6456,
+        "attack": 985,
+        "defense": 985,
+        "speed": 99,
+        "critical_hit_rate": 10,
+        "critical_hit_damage": 50,
+        "debuff_rate": 10,
+        "resistance": 25
+      }
     },
     "water": {
-      "health": 7311,
-      "attack": 1339,
-      "defense": 1199,
-      "speed": 102,
-      "critical_hit_rate": 30,
-      "critical_hit_damage": 60,
-      "debuff_rate": 20,
-      "resistance": 35
+      "class": "striker",
+      "stats": {
+        "health": 7311,
+        "attack": 1339,
+        "defense": 1199,
+        "speed": 102,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 35
+      }
     }
   }
 }

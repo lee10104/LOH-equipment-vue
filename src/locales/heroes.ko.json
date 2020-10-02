@@ -31,6 +31,13 @@
       "water": "물",
       "earth": "대지",
       "light": "빛"
+    },
+    "class": {
+      "guardian": "가디언",
+      "warrior": "워리어",
+      "striker": "스트라이커",
+      "sniper": "슈터",
+      "cleric": "프리스트"
     }
   }
 }
