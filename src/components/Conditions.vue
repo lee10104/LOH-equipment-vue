@@ -5,7 +5,13 @@
       <AppButton label="+" color="light-grey" size="small" @click="addCondition" />
       <AppButton :label="$t('calculate')" color="red" />
     </div>
-    <Condition v-for="(condition, index) in conditions" v-bind:key="index" :condition="condition" />
+    <Condition
+      v-for="(condition, index) in conditions"
+      v-bind:key="index"
+      :index="index"
+      :condition="condition"
+      @update="updateCondition"
+    />
   </div>
 </template>
 
@@ -23,6 +29,9 @@ export default {
   methods: {
     addCondition() {
       this.conditions.push({});
+    },
+    updateCondition(index, condition) {
+      this.$set(this.conditions, index, condition);
     }
   }
 };

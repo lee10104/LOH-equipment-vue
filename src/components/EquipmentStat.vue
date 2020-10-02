@@ -47,7 +47,7 @@ export default {
   },
   methods: {
     updateOption() {
-      this.$emit('input', this.index, this.statForm );
+      this.$emit('update', this.index, this.statForm );
     },
     updateId(id) {
       this.statForm = { ...this.statForm, id };

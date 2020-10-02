@@ -12,6 +12,7 @@ import { statIdList } from '@/stats';
 export default {
   name: 'Condition',
   props: {
+    index: { type: Number, required: true },
     condition: { type: Object, required: true }
   },
   data() {
@@ -20,14 +21,20 @@ export default {
     };
   },
   methods: {
+    update() {
+      this.$emit('update', this.index, this.conditionForm);
+    },
     updateId(statId) {
       this.conditionForm = { ...this.conditionForm, statId };
+      this.update();
     },
     updateType(type) {
       this.conditionForm = { ...this.conditionForm, type };
+      this.update();
     },
     updateValue(value) {
       this.conditionForm = { ...this.conditionForm, value };
+      this.update();
     }
   },
   computed: {

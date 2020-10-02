@@ -13,7 +13,7 @@
       </div>
       <div class="AppEquipmentDialog__option-title">{{ $t('equipment.main_option') }}</div>
       <div class="AppEquipmentDialog__main-option">
-        <EquipmentStat :stat="mainOption" :index="0" @input="updateOption" />
+        <EquipmentStat :stat="mainOption" :index="0" @update="updateOption" />
       </div>
       <div class="AppEquipmentDialog__sub-options">
         <div class="AppEquipmentDialog__option-title">
@@ -25,7 +25,7 @@
           v-for="(subOption, index) in subOptions"
           v-bind:key="index"
         >
-          <EquipmentStat :stat="subOption" :index="index + 1" @input="updateOption" />
+          <EquipmentStat :stat="subOption" :index="index + 1" @update="updateOption" />
         </div>
       </div>
     </template>
