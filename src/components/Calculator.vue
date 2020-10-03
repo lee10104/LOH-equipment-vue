@@ -21,10 +21,22 @@
           {{ $t('result', [results.length]) }}
         </div>
         <div class="Calculator__result" v-for="(result, index) in results" v-bind:key="index">
-          <EquipmentSummary v-for="equipment in result" v-bind:key="equipment.id" :equipment="equipment" />
+          <EquipmentSummary
+            v-for="equipment in result"
+            v-bind:key="equipment.id"
+            :equipment="equipment"
+            @click="onOffEquipmentFormDialog(equipment)"
+          />
         </div>
       </div>
     </div>
+    <EquipmentFormDialog
+      v-if="showEquipmentFormDialog"
+      :title="$t('equipment.information')"
+      :equipment="equipment"
+      :read-only="true"
+      @close="onOffEquipmentFormDialog(null)"
+    />
   </div>
 </template>
 
@@ -35,10 +47,11 @@ import Checker from '@/checker';
 import { equipmentPartList } from '@/equipment';
 import Condition from './Condition';
 import EquipmentSummary from './EquipmentSummary';
+import EquipmentFormDialog from './EquipmentFormDialog';
 
 export default {
   name: 'Calculator',
-  components: { Condition, EquipmentSummary },
+  components: { Condition, EquipmentSummary, EquipmentFormDialog },
   props: {
     equipments: { type: Array, required: true },
     hero: {
@@ -47,7 +60,13 @@ export default {
     }
   },
   data() {
-    return { conditions: [], results: [], total: null };
+    return {
+      conditions: [],
+      equipment: null,
+      results: [],
+      showEquipmentFormDialog: false,
+      total: null
+    };
   },
   methods: {
     addCondition() {
@@ -76,6 +95,12 @@ export default {
       }
 
       this.total = null;
+    },
+    onOffEquipmentFormDialog(equipment) {
+      this.equipment = equipment;
+      this.showEquipmentFormDialog = !this.showEquipmentFormDialog;
+
+      this.$emit('open-dialog', this.showEquipmentFormDialog);
     },
     updateCondition(index, condition) {
       this.$set(this.conditions, index, condition);

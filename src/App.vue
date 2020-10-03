@@ -2,7 +2,7 @@
   <div :class="['App', isDialogOpen ? 'App--disabled' : '']">
     <div class="App__body">
       <HeroInfo class="App__component" @change="updateHero"/>
-      <Calculator class="App__component" :hero="hero" :equipments="equipments" />
+      <Calculator class="App__component" :hero="hero" :equipments="equipments" @open-dialog="disableClick" />
     </div>
     <Equipments @open-dialog="disableClick" @update="updateEquipments" class="App__component" />
   </div>

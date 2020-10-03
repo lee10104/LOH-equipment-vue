@@ -2,6 +2,7 @@
   "equipment": {
     "add": "장비 추가",
     "modify": "장비 수정",
+    "information": "장비 정보",
     "main_option": "주옵션",
     "sub_option": "부옵션",
     "part": {
