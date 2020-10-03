@@ -32,10 +32,11 @@ class Calculator {
     const result = {};
     statIdList.map(id => (result[id] = 0));
     stats.forEach(stat => {
+      const value = Number(stat.value);
       if (stat.type === 'percentage' && ['health', 'attack', 'defense'].includes(stat.id))
-        result[stat.id] += this.hero.rawStats[stat.id] * stat.value * 0.01;
+        result[stat.id] += this.hero.rawStats[stat.id] * value * 0.01;
       else
-        result[stat.id] += stat.value;
+        result[stat.id] += value;
     });
 
     for (let key in result) {

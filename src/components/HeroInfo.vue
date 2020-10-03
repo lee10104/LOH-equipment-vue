@@ -7,7 +7,10 @@
     <div v-if="stats" class="HeroInfo__stats">
       <div v-for="stat in stats" v-bind:key="stat.id" class="HeroInfo__stat">
         {{ $t(`stats.${stat.id}`) }}
-        <div class="HeroInfo__stat-value">{{ stat.value }}<span v-if="stat.type == 'percentage'">%</span></div>
+        <div class="HeroInfo__stat-value">
+          {{ stat.value }}<span v-if="stat.type == 'percentage'">%</span>
+          <span v-if="equipmentStats[stat.id]">(+{{ equipmentStats[stat.id] }}<template v-if="stat.type == 'percentage'">%</template>)</span>
+        </div>
       </div>
     </div>
     <div v-else class="HeroInfo__stats">
