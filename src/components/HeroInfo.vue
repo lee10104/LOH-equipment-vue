@@ -22,6 +22,9 @@ import Hero from '@/hero';
 
 export default {
   name: 'HeroInfo',
+  props: {
+    equipmentStats: { type: Object, required: true }
+  },
   data() {
     return { id: '', heroType: '' };
   },

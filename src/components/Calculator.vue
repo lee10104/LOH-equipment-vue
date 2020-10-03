@@ -27,6 +27,13 @@
             :equipment="equipment"
             @click="onOffEquipmentFormDialog(equipment)"
           />
+          <AppButton
+            class="Calculator__check"
+            size="small"
+            label="✓"
+            :disabled="clickedIndex === index"
+            @click="updateHeroInfo(index, result)"
+          />
         </div>
       </div>
     </div>
@@ -61,6 +68,7 @@ export default {
   },
   data() {
     return {
+      clickedIndex: null,
       conditions: [],
       equipment: null,
       results: [],
@@ -78,7 +86,6 @@ export default {
         return;
       }
 
-      const calculator = new Calculator(this.hero);
       const checker = new Checker(this.hero, this.conditions);
       this.results = [];
       const numberList = this.equipmentsPerPart.map(equipments => equipments.length);
@@ -90,7 +97,7 @@ export default {
         this.calculatingIndex = i + 1;
         const elements = this.equipmentsPerPart.map((equipments, index) => equipments[~~(i % numberList[index] / (numberList[index + 1] || 1))]);
 
-        if (checker.check(calculator.calculate(elements)))
+        if (checker.check(this.calculator.calculate(elements)))
           this.results.push(elements);
       }
 
@@ -104,9 +111,16 @@ export default {
     },
     updateCondition(index, condition) {
       this.$set(this.conditions, index, condition);
+    },
+    updateHeroInfo(index, equipments) {
+      this.clickedIndex = index;
+      this.$emit('update', this.calculator.calculate(equipments));
     }
   },
   computed: {
+    calculator() {
+      return new Calculator(this.hero);
+    },
     equipmentsPerPart() {
       return equipmentPartList.map(part => {
         return this.equipments.filter(equipment => (
@@ -152,6 +166,12 @@ export default {
   margin-bottom: 10px;
   padding-left: 5px;
   padding-top: 5px;
+}
+
+.Calculator__check {
+  margin-right: 5px;
+  margin-bottom: 5px;
+  vertical-align: bottom !important;
 }
 
 .Calculator__result-title {
