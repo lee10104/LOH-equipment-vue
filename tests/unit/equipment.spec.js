@@ -20,24 +20,23 @@ describe('equipmentPartList', () => {
 });
 
 describe('Equipment', () => {
+  let equipmentData;
   let equipment;
   beforeEach(() => {
-    equipment = new Equipment(
-      1,
-      {
-        part: 'weapon',
-        type: 'strength',
-        grade: 6,
-        level: 15,
-        mainOption: { id: 'attack', value: 67, type: 'percentage' },
-        subOptions: [
-          { id: 'health', value: 375, type: 'number' },
-          { id: 'defense', value: 6, type: 'percentage' },
-          { id: 'critical_hit_damage', value: 13, type: 'percentage' },
-          { id: 'attack', value: 64 }
-        ]
-      }
-    );
+    equipmentData = {
+      part: 'weapon',
+      type: 'strength',
+      grade: 6,
+      level: 15,
+      mainOption: { id: 'attack', value: 67, type: 'percentage' },
+      subOptions: [
+        { id: 'health', value: 375, type: 'number' },
+        { id: 'defense', value: 6, type: 'percentage' },
+        { id: 'critical_hit_damage', value: 13, type: 'percentage' },
+        { id: 'attack', value: 64 }
+      ]
+    };
+    equipment = new Equipment(1, equipmentData);
   });
 
   describe('id', () => {
@@ -119,6 +118,15 @@ describe('Equipment', () => {
       expect(equipment.subOptions).toStrictEqual([
         { id: 'attack', value: 44, type: 'number' }
       ]);
+    });
+  });
+
+  describe('isClassAvailable', () => {
+    it('should work', () => {
+      expect(equipment.isClassAvailable('guardian')).toBe(true);
+
+      equipmentData.type = 'healing';
+      expect(new Equipment(2, equipmentData).isClassAvailable('guardian')).toBe(false);
     });
   });
 });

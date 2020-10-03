@@ -12,6 +12,14 @@ export const equipmentTypeInfos = {
 
 export const equipmentPartList = ['weapon', 'armor', 'gloves', 'shoes', 'ring', 'necklace'];
 
+const classByEquipmentType = {
+  aegis: 'guardian',
+  revenge: 'warrior',
+  pierce: 'striker',
+  surge: 'sniper',
+  healing: 'cleric'
+};
+
 class Equipment {
   constructor(id, data) {
     if (data)
@@ -61,6 +69,13 @@ class Equipment {
 
   update(newData) {
     this.data = { ...this.data, ...newData };
+  }
+
+  isClassAvailable(heroClass) {
+    const equipmentTypeOfClass = Object.keys(classByEquipmentType);
+
+    return classByEquipmentType[this.type] === heroClass ||
+      !equipmentTypeOfClass.includes(this.type)
   }
 }
 
