@@ -30,6 +30,7 @@
 
 <script>
 import Hero from '@/hero';
+import Calculator from '@/calculator';
 import { equipmentPartList } from '@/equipment';
 import Condition from './Condition';
 import EquipmentSummary from './EquipmentSummary';
@@ -57,6 +58,7 @@ export default {
         return;
       }
 
+      const calculator = new Calculator(this.hero);
       this.results = [];
       const numberList = this.equipmentsPerPart.map(equipments => equipments.length);
       for (let i = 5; i > 0; i--)
@@ -66,7 +68,16 @@ export default {
       for (let i = 0; i < this.total; i++) {
         this.calculatingIndex = i + 1;
         const elements = this.equipmentsPerPart.map((equipments, index) => equipments[~~(i % numberList[index] / (numberList[index + 1] || 1))]);
-        this.results.push(elements);
+        const calculatedStats = calculator.calculate(elements);
+
+        const result = this.conditions.reduce((condition, flag) => {
+          if (condition.type === 'gte')
+            return condition.value >= calculatedStats[condition.statId] + this.hero[condition.statId] && flag;
+          else if (condition.type === 'lt')
+            return condition.value < calculatedStats[condition.statId] + this.hero[condition.statId] && flag;
+        }, true);
+
+        if (result) this.results.push(elements);
       }
 
       this.total = null;
