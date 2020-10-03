@@ -8,24 +8,24 @@
     <template #title>{{ title }}</template>
     <template #content>
       <div class="AppEquipmentDialog__select-header">
-        <AppSelect name="type" :value="type" :options="equipmentTypes" @change="updateType" />
-        <AppSelect name="part" :value="part" :options="equipmentParts" @change="updatePart" />
+        <AppSelect name="type" :value="type" :options="equipmentTypes" :disabled="readOnly" @change="updateType" />
+        <AppSelect name="part" :value="part" :options="equipmentParts" :disabled="readOnly" @change="updatePart" />
       </div>
       <div class="AppEquipmentDialog__option-title">{{ $t('equipment.main_option') }}</div>
       <div class="AppEquipmentDialog__main-option">
-        <EquipmentStat :stat="mainOption" :index="0" @update="updateOption" />
+        <EquipmentStat :stat="mainOption" :index="0" :read-only="readOnly" @update="updateOption" />
       </div>
       <div class="AppEquipmentDialog__sub-options">
         <div class="AppEquipmentDialog__option-title">
           {{ $t('equipment.sub_option') }}
-          <AppButton label="+" color="light-grey" size="small" @click="addSubOption" />
+          <AppButton label="+" color="light-grey" size="small" :disabled="readOnly" @click="addSubOption" />
         </div>
         <div
           class="AppEquipmentDialog__sub-option"
           v-for="(subOption, index) in subOptions"
           v-bind:key="index"
         >
-          <EquipmentStat :stat="subOption" :index="index + 1" @update="updateOption" />
+          <EquipmentStat :stat="subOption" :index="index + 1" :read-only="readOnly" @update="updateOption" />
         </div>
       </div>
     </template>
@@ -43,7 +43,8 @@ export default {
   components: { EquipmentStat },
   props: {
     title: { type: String, required: true },
-    equipment: { type: Equipment, required: true }
+    equipment: { type: Equipment, required: true },
+    readOnly: { type: Boolean, default: false }
   },
   data() {
     return {
@@ -83,6 +84,7 @@ export default {
   },
   computed: {
     disableSubmitButton() {
+      if (this.readOnly) return true;
       return isEqual(this.mainOption, this.equipment.mainOption)
         && isEqual(this.subOptions, this.equipment.subOptions)
         && isEqual(this.type, this.equipment.type)

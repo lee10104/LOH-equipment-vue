@@ -4,14 +4,16 @@
       name="id"
       :value="statForm.id"
       :options="statIds"
+      :disabled="readOnly"
       @change="updateId"
     />
     <div class="EquipmentStat__value">
-      <AppInput :value="statForm.value" @input="updateValue" />
+      <AppInput :value="statForm.value" @input="updateValue" :disabled="readOnly" />
       <AppButton
         @click="updateType"
         class="EquipmentStat__button"
         :label="isPercentage ? '%' : '.'"
+        :disabled="readOnly"
         color="light-grey"
         size="small"
       />
@@ -26,7 +28,8 @@ export default {
   name: 'EquipmentStat',
   props: {
     index: { type: Number, required: true },
-    stat: { type: Object, required: true }
+    stat: { type: Object, required: true },
+    readOnly: { type: Boolean, default: false }
   },
   data() {
     return {

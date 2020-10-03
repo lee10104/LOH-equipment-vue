@@ -1,5 +1,5 @@
 <template>
-  <button :class="buttonClass" @click="$emit('click')" :disabled="disabled">
+  <button :class="buttonClass" @click="$emit('click')">
     {{ label }}
   </button>
 </template>
@@ -60,7 +60,7 @@ export default {
   }
 
   &--disabled {
-    opacity: 0.1;
+    opacity: 0.3;
     cursor: default;
   }
 }
