@@ -68,6 +68,7 @@ export default {
         subOptions: [ ...this.subOptions ]
       });
       this.$emit('submit', this.equipment);
+      this.$emit('close');
     },
     updateOption(index, newOption) {
       if (index === 0)

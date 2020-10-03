@@ -82,7 +82,12 @@ export default {
     },
     calculate() {
       if (!this.hero) {
-        alert(this.$t('select_hero'));
+        alert(this.$t('alert.select_hero'));
+        return;
+      }
+
+      if (this.conditions.length === 0) {
+        alert(this.$t('alert.add_conditions'));
         return;
       }
 
@@ -99,6 +104,12 @@ export default {
 
         if (checker.check(this.calculator.calculate(elements)))
           this.results.push(elements);
+
+        if (this.results.length > 100) {
+          alert(this.$t('alert.too_many_results'));
+          this.results = [];
+          break;
+        }
       }
 
       this.total = null;
