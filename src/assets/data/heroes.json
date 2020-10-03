@@ -1,4 +1,159 @@
 {
+  "aslan": {
+    "earth": {
+      "class": "warrior",
+      "stats": {
+        "health": 8453,
+        "attack": 1208,
+        "defense": 1171,
+        "speed": 105,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    }
+  },
+  "charlotte": {
+    "water": {
+      "class": "cleric",
+      "stats": {
+        "health": 12338,
+        "attack": 787,
+        "defense": 937,
+        "speed": 98,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 45
+      }
+    },
+    "earth": {
+      "class": "cleric",
+      "stats": {
+        "health": 8341,
+        "attack": 1077,
+        "defense": 1049,
+        "speed": 96,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 45
+      }
+    }
+  },
+  "chrome": {
+    "fire": {
+      "class": "warrior",
+      "stats": {
+        "health": 12151,
+        "attack": 1217,
+        "defense": 1040,
+        "speed": 102,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    },
+    "water": {
+      "class": "guardian",
+      "stats": {
+        "health": 10850,
+        "attack": 1040,
+        "defense": 1348,
+        "speed": 97,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 45
+      }
+    }
+  },
+  "cyan": {
+    "fire": {
+      "class": "striker",
+      "stats": {
+        "health": 13434,
+        "attack": 1133,
+        "defense": 1011,
+        "speed": 99,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 35
+      }
+    },
+    "water": {
+      "class": "warrior",
+      "stats": {
+        "health": 12451,
+        "attack": 1143,
+        "defense": 834,
+        "speed": 100,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    }
+  },
+  "fram": {
+    "water": {
+      "class": "guardian",
+      "stats": {
+        "health": 14051,
+        "attack": 880,
+        "defense": 787,
+        "speed": 101,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 60
+      }
+    }
+  },
+  "frau": {
+    "fire": {
+      "class": "striker",
+      "stats": {
+        "health": 7995,
+        "attack": 1451,
+        "defense": 1236,
+        "speed": 96,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 35
+      }
+    },
+    "water": {
+      "class": "warrior",
+      "stats": {
+        "health": 12797,
+        "attack": 1143,
+        "defense": 796,
+        "speed": 101,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    },
+    "earth": {
+      "class": "sniper",
+      "stats": {
+        "health": 10962,
+        "attack": 1236,
+        "defense": 890,
+        "speed": 97,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    }
+  },
   "helga": {
     "darkness": {
       "class": "warrior",
@@ -37,6 +192,454 @@
         "critical_hit_damage": 60,
         "debuff_rate": 20,
         "resistance": 35
+      }
+    }
+  },
+  "johann": {
+    "fire": {
+      "class": "cleric",
+      "stats": {
+        "health": 8837,
+        "attack": 1367,
+        "defense": 1011,
+        "speed": 104,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 45
+      }
+    },
+    "light": {
+      "class": "warrior",
+      "stats": {
+        "health": 7770,
+        "attack": 1133,
+        "defense": 1114,
+        "speed": 98,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 90,
+        "debuff_rate": 20,
+        "resistance": 0
+      }
+    }
+  },
+  "joshua": {
+    "fire": {
+      "class": "striker",
+      "stats": {
+        "health": 9025,
+        "attack": 1470,
+        "defense": 909,
+        "speed": 97,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 35
+      }
+    },
+    "water": {
+      "class": "sniper",
+      "stats": {
+        "health": 11533,
+        "attack": 1180,
+        "defense": 890,
+        "speed": 105,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    }
+  },
+  "lairei": {
+    "fire": {
+      "class": "warrior",
+      "stats": {
+        "health": 13134,
+        "attack": 1217,
+        "defense": 899,
+        "speed": 100,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    },
+    "earth": {
+      "class": "striker",
+      "stats": {
+        "health": 9708,
+        "attack": 1498,
+        "defense": 1021,
+        "speed": 100,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 35
+      }
+    }
+  },
+  "laplas": {
+    "fire": {
+      "class": "sniper",
+      "stats": {
+        "health": 11346,
+        "attack": 1011,
+        "defense": 1133,
+        "speed": 99,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    },
+    "earth": {
+      "class": "warrior",
+      "stats": {
+        "health": 9296,
+        "attack": 1264,
+        "defense": 1283,
+        "speed": 100,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    }
+  },
+  "lucilika": {
+    "water": {
+      "class": "sniper",
+      "stats": {
+        "health": 8322,
+        "attack": 1330,
+        "defense": 1292,
+        "speed": 103,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    },
+    "earth": {
+      "class": "striker",
+      "stats": {
+        "health": 7658,
+        "attack": 1451,
+        "defense": 1274,
+        "speed": 107,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 35
+      }
+    }
+  },
+  "lumie": {
+    "water": {
+      "class": "warrior",
+      "stats": {
+        "health": 9483,
+        "attack": 1274,
+        "defense": 1199,
+        "speed": 101,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    },
+    "earth": {
+      "class": "guardian",
+      "stats": {
+        "health": 14735,
+        "attack": 918,
+        "defense": 890,
+        "speed": 110,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 45
+      }
+    }
+  },
+  "meiling": {
+    "fire": {
+      "class": "sniper",
+      "stats": {
+        "health": 6628,
+        "attack": 1189,
+        "defense": 1161,
+        "speed": 103,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    },
+    "earth": {
+      "class": "striker",
+      "stats": {
+        "health": 6057,
+        "attack": 1140,
+        "defense": 928,
+        "speed": 110,
+        "critical_hit_rate": 10,
+        "critical_hit_damage": 50,
+        "debuff_rate": 10,
+        "resistance": 25
+      }
+    },
+    "light": {
+      "class": "sniper",
+      "stats": {
+        "health": 9834,
+        "attack": 1018,
+        "defense": 798,
+        "speed": 99,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 50,
+        "debuff_rate": 0,
+        "resistance": 5
+      }
+    }
+  },
+  "mikhail": {
+    "darkness": {
+      "class": "sniper",
+      "stats": {
+        "health": 11309,
+        "attack": 1208,
+        "defense": 890,
+        "speed": 103,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 15
+      }
+    }
+  },
+  "nine": {
+    "darkness": {
+      "class": "sniper",
+      "stats": {
+        "health": 9408,
+        "attack": 1283,
+        "defense": 1011,
+        "speed": 101,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 15
+      }
+    },
+    "earth": {
+      "class": "striker",
+      "stats": {
+        "health": 7386,
+        "attack": 1395,
+        "defense": 1077,
+        "speed": 105,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 35
+      }
+    }
+  },
+  "olga": {
+    "water": {
+      "class": "sniper",
+      "stats": {
+        "health": 10962,
+        "attack": 1208,
+        "defense": 918,
+        "speed": 102,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    },
+    "earth": {
+      "class": "sniper",
+      "stats": {
+        "health": 7658,
+        "attack": 1264,
+        "defense": 1189,
+        "speed": 98,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    },
+    "light": {
+      "class": "striker",
+      "stats": {
+        "health": 9708,
+        "attack": 1564,
+        "defense": 955,
+        "speed": 101,
+        "critical_hit_rate": 40,
+        "critical_hit_damage": 60,
+        "debuff_rate": 10,
+        "resistance": 15
+      }
+    }
+  },
+  "rosanna": {
+    "darkness": {
+      "class": "guardian",
+      "stats": {
+        "health": 11262,
+        "attack": 946,
+        "defense": 1189,
+        "speed": 107,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 10,
+        "resistance": 25
+      }
+    },
+    "fire": {
+      "class": "striker",
+      "stats": {
+        "health": 8678,
+        "attack": 1489,
+        "defense": 918,
+        "speed": 99,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 35
+      }
+    }
+  },
+  "schneider": {
+    "fire": {
+      "class": "striker",
+      "stats": {
+        "health": 9025,
+        "attack": 1489,
+        "defense": 890,
+        "speed": 100,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 35
+      }
+    },
+    "water": {
+      "class": "striker",
+      "stats": {
+        "health": 6628,
+        "attack": 1311,
+        "defense": 1105,
+        "speed": 104,
+        "critical_hit_rate": 30,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 35
+      }
+    },
+    "earth": {
+      "class": "warrior",
+      "stats": {
+        "health": 11767,
+        "attack": 1077,
+        "defense": 768,
+        "speed": 104,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 30,
+        "resistance": 35
+      }
+    }
+  },
+  "vanessa": {
+    "fire": {
+      "class": "cleric",
+      "stats": {
+        "health": 13002,
+        "attack": 852,
+        "defense": 1002,
+        "speed": 103,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 45
+      }
+    },
+    "water": {
+      "class": "cleric",
+      "stats": {
+        "health": 9025,
+        "attack": 1180,
+        "defense": 1077,
+        "speed": 97,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 45
+      }
+    },
+    "light": {
+      "class": "cleric",
+      "stats": {
+        "health": 11309,
+        "attack": 1143,
+        "defense": 890,
+        "speed": 107,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 90,
+        "debuff_rate": 10,
+        "resistance": 25
+      }
+    }
+  },
+  "walter": {
+    "earth": {
+      "class": "guardian",
+      "stats": {
+        "health": 9708,
+        "attack": 983,
+        "defense": 1517,
+        "speed": 107,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 45
+      }
+    }
+  },
+  "zaira": {
+    "fire": {
+      "class": "guardian",
+      "stats": {
+        "health": 10167,
+        "attack": 974,
+        "defense": 1283,
+        "speed": 104,
+        "critical_hit_rate": 20,
+        "critical_hit_damage": 60,
+        "debuff_rate": 20,
+        "resistance": 45
+      }
+    }
+  },
+  "zhurahan": {
+    "darkness": {
+      "class": "warrior",
+      "stats": {
+        "health": 7050,
+        "attack": 1075,
+        "defense": 1018,
+        "speed": 100,
+        "critical_hit_rate": 10,
+        "critical_hit_damage": 80,
+        "debuff_rate": 0,
+        "resistance": 5
       }
     }
   }
