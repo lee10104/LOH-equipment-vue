@@ -1,9 +1,12 @@
 {
   "calculate": "계산하기",
+  "calculating": "계산중 - {0} / {1}",
   "calculator": "계산기",
   "close": "닫기",
+  "result": "결과: {0}개",
   "no_data": "정보 없음",
   "select": "선택",
+  "select_hero": "영웅을 선택해주세요.",
   "submit": "저장",
   "warning": "주의사항"
 }

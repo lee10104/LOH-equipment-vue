@@ -3,7 +3,8 @@
     <div class="Calculator__title">
       {{ $t('calculator') }}
       <AppButton label="+" color="light-grey" size="small" @click="addCondition" />
-      <AppButton :label="$t('calculate')" color="red" />
+      <AppButton :label="$t('calculate')" color="red" @click="calculate" />
+      <span v-if="total">{{ $t('calculating', [calculatingIndex, total]) }}</span>
     </div>
     <div class="Calculator__content">
       <div class="Calculator__conditions">
@@ -15,20 +16,27 @@
           @update="updateCondition"
         />
       </div>
-      <div class="Calculator__results" />
+      <div class="Calculator__results">
+        <div v-if="results.length > 0" class="Calculator__result-title">
+          {{ $t('result', [results.length]) }}
+        </div>
+        <div class="Calculator__result" v-for="(result, index) in results" v-bind:key="index">
+          <EquipmentSummary v-for="equipment in result" v-bind:key="equipment.id" :equipment="equipment" />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import Hero from '@/hero';
-// import Equipment from '@/equipment';
+import { equipmentPartList } from '@/equipment';
 import Condition from './Condition';
-// import EquipmentSummary from './EquipmentSummary';
+import EquipmentSummary from './EquipmentSummary';
 
 export default {
   name: 'Calculator',
-  components: { Condition },
+  components: { Condition, EquipmentSummary },
   props: {
     equipments: { type: Array, required: true },
     hero: {
@@ -37,14 +45,43 @@ export default {
     }
   },
   data() {
-    return { conditions: [] };
+    return { conditions: [], results: [], total: null };
   },
   methods: {
     addCondition() {
       this.conditions.push({});
     },
+    calculate() {
+      if (!this.hero) {
+        alert(this.$t('select_hero'));
+        return;
+      }
+
+      this.results = [];
+      const numberList = this.equipmentsPerPart.map(equipments => equipments.length);
+      for (let i = 5; i > 0; i--)
+        numberList[i - 1] *= numberList[i];
+      this.total = numberList[0];
+
+      for (let i = 0; i < this.total; i++) {
+        this.calculatingIndex = i + 1;
+        const elements = this.equipmentsPerPart.map((equipments, index) => equipments[~~(i % numberList[index] / (numberList[index + 1] || 1))]);
+        this.results.push(elements);
+      }
+
+      this.total = null;
+    },
     updateCondition(index, condition) {
       this.$set(this.conditions, index, condition);
+    }
+  },
+  computed: {
+    equipmentsPerPart() {
+      return equipmentPartList.map(part => {
+        return this.equipments.filter(equipment => (
+          equipment.part === part && equipment.isClassAvailable(this.hero.class)
+        ));
+      });
     }
   }
 };
@@ -61,6 +98,10 @@ export default {
   font-size: 20px;
   font-weight: 700;
   margin-bottom: 20px;
+
+  > span {
+    margin-left: 10px;
+  }
 }
 
 .Calculator__content {
