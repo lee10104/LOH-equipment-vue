@@ -4,7 +4,6 @@
       {{ $t('calculator') }}
       <AppButton label="+" color="light-grey" size="small" @click="addCondition" />
       <AppButton :label="$t('calculate')" color="red" @click="calculate" />
-      <span v-if="total">{{ $t('calculating', [calculatingIndex, total]) }}</span>
     </div>
     <div class="Calculator__content">
       <div class="Calculator__conditions">
@@ -72,8 +71,7 @@ export default {
       conditions: [],
       equipment: null,
       results: [],
-      showEquipmentFormDialog: false,
-      total: null
+      showEquipmentFormDialog: false
     };
   },
   watch: {
@@ -102,10 +100,8 @@ export default {
       const numberList = this.equipmentsPerPart.map(equipments => equipments.length);
       for (let i = 5; i > 0; i--)
         numberList[i - 1] *= numberList[i];
-      this.total = numberList[0];
 
-      for (let i = 0; i < this.total; i++) {
-        this.calculatingIndex = i + 1;
+      for (let i = 0; i < numberList[0]; i++) {
         const elements = this.equipmentsPerPart.map((equipments, index) => equipments[~~(i % numberList[index] / (numberList[index + 1] || 1))]);
 
         if (checker.check(this.calculator.calculate(elements)))
@@ -113,12 +109,12 @@ export default {
 
         if (this.results.length > 100) {
           alert(this.$t('alert.too_many_results'));
-          this.results = [];
           break;
         }
       }
 
-      this.total = null;
+      if (this.results.length === 0)
+        alert(this.$t('alert.no_data'));
     },
     onOffEquipmentFormDialog(equipment) {
       this.equipment = equipment;
