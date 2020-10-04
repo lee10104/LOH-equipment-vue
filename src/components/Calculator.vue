@@ -32,7 +32,7 @@
             size="small"
             label="✓"
             :disabled="clickedIndex === index"
-            @click="updateHeroInfo(index, result)"
+            @click="updateHeroInfo(index, calculator.calculate(result))"
           />
         </div>
       </div>
@@ -75,6 +75,12 @@ export default {
       showEquipmentFormDialog: false,
       total: null
     };
+  },
+  watch: {
+    hero() {
+      this.results = [];
+      this.updateHeroInfo(null, {});
+    }
   },
   methods: {
     addCondition() {
@@ -123,9 +129,9 @@ export default {
     updateCondition(index, condition) {
       this.$set(this.conditions, index, condition);
     },
-    updateHeroInfo(index, equipments) {
+    updateHeroInfo(index, equipmentStats) {
       this.clickedIndex = index;
-      this.$emit('update', this.calculator.calculate(equipments));
+      this.$emit('update', equipmentStats);
     }
   },
   computed: {
