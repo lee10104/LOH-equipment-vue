@@ -1,0 +1,13 @@
+{
+  "notice": {
+    "title": "사용법 및 주의사항",
+    "instruction": {
+      "title": "사용법",
+      "description": "1. 장비를 등록하세요.<br>2. 영웅을 선택하세요.<br>3. 조건을 설정하고 계산하기 버튼을 눌러주세요."
+    },
+    "precaution": {
+      "title": "주의사항",
+      "description": "<b style=\"color: red;\">0. 아직 개발 중입니다.</b><br>1. 개발 상태는 <a target=\"_blank\" href=\"https://github.com/lee10104/LOH-equipment-vue\">여기</a>에서 확인 해주세요.<br>2. 장비 정보는 브라우저에 저장 됩니다. 쿠키를 삭제하면 장비가 사라질 수 있으니 export를 눌러 데이터를 백업 해주세요."
+    }
+  }
+}
