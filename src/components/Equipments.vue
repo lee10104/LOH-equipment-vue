@@ -28,6 +28,8 @@
 
 <script>
 import Equipment from '@/equipment';
+import { equipmentTypeList, equipmentPartList } from '@/equipment';
+import { statIdList } from '@/stats';
 import EquipmentSummary from './EquipmentSummary';
 import EquipmentFormDialog from './EquipmentFormDialog';
 import NoticeDialog from './NoticeDialog';
@@ -86,6 +88,9 @@ export default {
       if (!existingIds.includes(this.equipment.id))
         this.equipments.push(this.equipment);
 
+      this.updateLocalStorage();
+    },
+    updateLocalStorage() {
       const result = {};
       this.equipments.forEach(equipment => {
         result[equipment.id] = equipment.format;
@@ -128,7 +133,81 @@ export default {
         return;
       }
 
-      console.log('import!');
+      const fr = new FileReader();
+        fr.onload = e => {
+          const equipments = this.parseEquipments(e.target.result.split('\n'))
+          if (equipments) {
+            this.equipments = equipments;
+            this.updateLocalStorage();
+          }
+        }
+        fr.readAsText(files.item(0));
+    },
+    parseEquipments(equipmentsData) {
+      try {
+        const locales = this.$i18n.messages[this.$i18n.locale]['equipment'];
+        const typeMap = this.swapKeyAndValue(locales['type']);
+        const partMap = this.swapKeyAndValue(locales['part']);
+        return equipmentsData.map((equipmentData, index) => {
+          const arr = equipmentData.split(',');
+
+          const equipmentObj = {};
+          equipmentObj.type = typeMap[arr[0]];
+          equipmentObj.part = partMap[arr[1]];
+          equipmentObj.grade = Number(arr[2]);
+          equipmentObj.level = Number(arr[3]);
+          const options = [];
+          for (let i = 2; i < 7; i++) {
+            options.push(arr.slice(i * 2, (i + 1) * 2));
+          }
+          equipmentObj.mainOption = this.parseOptionArr(options[0]);
+          equipmentObj.subOptions = options.slice(1, 5).map(option => this.parseOptionArr(option));
+
+          if (!this.valid(equipmentObj)) throw index;
+
+          return new Equipment(index, equipmentObj);
+        });
+      } catch(e) {
+        alert(this.$t('alert.file_not_valid', [e + 1]));
+        return null;
+      }
+    },
+    parseOptionArr(optionArr) {
+      const option = {}
+
+      const [optionKey, optionValue] = optionArr;
+
+      const statMap = this.swapKeyAndValue(this.$i18n.messages[this.$i18n.locale]['stats']);
+      option.id = statMap[optionKey];
+
+      const valueLength = optionValue.length;
+      if (optionValue[valueLength - 1] === '%') {
+        option.type = 'percentage';
+        option.value = Number(optionValue.slice(0, valueLength - 1));
+      }
+      else {
+        option.type = 'number';
+        option.value = Number(optionValue);
+      }
+
+      return option;
+    },
+    valid(equipmentObj) {
+      if (!equipmentTypeList.includes(equipmentObj.type)) return false;
+      if (!equipmentPartList.includes(equipmentObj.part)) return false;
+      if (isNaN(equipmentObj.grade)) return false;
+      if (isNaN(equipmentObj.level)) return false;
+
+      const options = [equipmentObj.mainOption, ...equipmentObj.subOptions];
+      return options.reduce((result, option) => {
+        return result && statIdList.includes(option.id) && !isNaN(option.value);
+      }, true);
+    },
+    swapKeyAndValue(obj) {
+      return Object.keys(obj).reduce((ret, key) => {
+        ret[obj[key]] = key;
+        return ret;
+      }, {});
     }
   }
 };
