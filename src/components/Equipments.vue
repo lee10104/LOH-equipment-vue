@@ -95,7 +95,31 @@ export default {
       this.$emit('update', this.equipments);
     },
     exportEquipments() {
-      console.log('export!');
+      const dataStr = this.equipments.map(equipment => {
+        const arr = [
+          this.$t(`equipment.type.${equipment.type}`),
+          this.$t(`equipment.part.${equipment.part}`),
+          equipment.grade,
+          equipment.level,
+          ...this.optionToArr(equipment.mainOption),
+          ...equipment.subOptions.flatMap(subOption => this.optionToArr(subOption))
+        ];
+
+        return arr.join(',');
+      }).join('\n');
+
+      const blob = new Blob([dataStr], {type: 'text/csv'});
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.download = 'LOH-equipment.csv';
+      link.click();
+      window.URL.revokeObjectURL(link.href);
+    },
+    optionToArr(option) {
+      return [
+        this.$t(`stats.${option.id}`),
+        option.type === 'percentage' ? option.value + '%' : option.value
+      ];
     },
     importEquipments() {
       const files = document.getElementById('file').files;
