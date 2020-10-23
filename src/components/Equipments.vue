@@ -3,6 +3,9 @@
     <div class="Equipments__header">
       <AppButton :label="$t('equipment.add')" @click="onOffEquipmentFormDialog(newEquipment)"/>
       <AppButton :label="$t('warning')" color="red" @click="onOffNoticeDialog" />
+      <AppButton :label="$t('export')" color="light-grey" @click="exportEquipments" />
+      <AppButton :label="$t('import')" color="light-grey" @click="importEquipments" />
+      <input type="file" id="file" class="Equipments__header--right">
     </div>
     <div class="Equipments__container">
       <EquipmentSummary
@@ -90,6 +93,18 @@ export default {
       localStorage.equipments = JSON.stringify(result);
 
       this.$emit('update', this.equipments);
+    },
+    exportEquipments() {
+      console.log('export!');
+    },
+    importEquipments() {
+      const files = document.getElementById('file').files;
+      if (files.length <= 0) {
+        alert(this.$t('alert.select_file'));
+        return;
+      }
+
+      console.log('import!');
     }
   }
 };
@@ -102,5 +117,11 @@ export default {
 
 .Equipments__container {
   margin-top: 20px;
+}
+
+.Equipments__header {
+  &--right {
+    float: right;
+  }
 }
 </style>
