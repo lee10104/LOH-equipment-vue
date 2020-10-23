@@ -3,9 +3,12 @@
     <div class="Equipments__header">
       <AppButton :label="$t('equipment.add')" @click="onOffEquipmentFormDialog(newEquipment)"/>
       <AppButton :label="$t('warning')" color="red" @click="onOffNoticeDialog" />
-      <AppButton :label="$t('export')" color="light-grey" @click="exportEquipments" />
-      <AppButton :label="$t('import')" color="light-grey" @click="importEquipments" />
-      <input type="file" id="file" class="Equipments__header--right">
+      <div class="Equipments__header--right">
+        <AppButton :label="$t('initialize')" color="red" @click="initializeEquipments" />
+        <AppButton :label="$t('export')" color="light-grey" @click="exportEquipments" />
+        <AppButton :label="$t('import')" color="light-grey" @click="importEquipments" />
+        <input type="file" id="file">
+      </div>
     </div>
     <div class="Equipments__container">
       <EquipmentSummary
@@ -70,6 +73,12 @@ export default {
     }
   },
   methods: {
+    initializeEquipments() {
+      if (confirm(this.$t('confirm.initialize'))) {
+        this.equipments = [];
+        this.updateEquipments;
+      }
+    },
     onOffEquipmentFormDialog(equipment) {
       this.equipment = equipment;
       this.isDialogOpen = !this.isDialogOpen;
