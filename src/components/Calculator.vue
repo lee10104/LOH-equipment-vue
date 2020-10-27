@@ -76,8 +76,7 @@ export default {
   },
   watch: {
     hero() {
-      this.results = [];
-      this.updateHeroInfo(null, {});
+      this.initializeData();
     }
   },
   methods: {
@@ -131,6 +130,8 @@ export default {
         alert(this.$t('alert.add_conditions'));
         return;
       }
+
+      this.initializeData();
 
       const results = [];
       const checker = new Checker(this.hero, this.conditions);
@@ -186,6 +187,10 @@ export default {
         result[id] = 0;
         return result;
       }, {});
+    },
+    initializeData() {
+      this.results = [];
+      this.updateHeroInfo(null, {});
     },
     onOffEquipmentFormDialog(equipment) {
       this.equipment = equipment;
