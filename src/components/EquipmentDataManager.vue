@@ -70,7 +70,7 @@ export default {
         const typeMap = this.swapKeyAndValue(locales['type']);
         const partMap = this.swapKeyAndValue(locales['part']);
         return equipmentsData.map((equipmentData, index) => {
-          const arr = equipmentData.split(',');
+          const arr = equipmentData.trim().split(',');
 
           const equipmentObj = {};
           equipmentObj.type = typeMap[arr[0]];
