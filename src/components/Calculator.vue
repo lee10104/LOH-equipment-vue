@@ -48,9 +48,9 @@
 
 <script>
 import Hero from '@/hero';
-import Calculator from '@/calculator';
 import Checker from '@/checker';
-import { equipmentPartList } from '@/equipment';
+import { equipmentPartList, equipmentTypeInfos } from '@/equipment';
+import { statIdList } from '@/stats';
 import Condition from './Condition';
 import EquipmentSummary from './EquipmentSummary';
 import EquipmentFormDialog from './EquipmentFormDialog';
@@ -84,6 +84,43 @@ export default {
     addCondition() {
       this.conditions.push({});
     },
+    calculateEquipment(equipment, result) {
+      const newResult = { ...result };
+      const stats = [equipment.mainOption, ...equipment.subOptions];
+      stats.forEach(stat => (newResult[stat.id] += this.calculateStat(stat)));
+
+      return newResult;
+    },
+    calculateSetEffect(equipments, result) {
+      const stats = [];
+      const newResult = { ...result };
+      const equippedNumber = equipments.reduce((result, equipment) => {
+        result[equipment.type] ||= 0;
+        result[equipment.type] += 1;
+        return result;
+      }, {});
+
+      for (let key in equippedNumber) {
+        const equipmentTypeInfo = equipmentTypeInfos[key];
+        if (!equipmentTypeInfo) continue;
+
+        const setNumber = ~~(equippedNumber[key] / equipmentTypeInfo.number);
+
+        for (let i = 0; i < setNumber; i++)
+          stats.push({ id: equipmentTypeInfo.statId, value: equipmentTypeInfo.value, type: 'percentage' });
+      }
+
+      stats.forEach(stat => (newResult[stat.id] += this.calculateStat(stat)));
+
+      return newResult;
+    },
+    calculateStat(stat) {
+      const value = Number(stat.value);
+      if (stat.type === 'percentage' && ['health', 'attack', 'defense'].includes(stat.id))
+        return this.hero.rawStats[stat.id] * value * 0.01;
+      else
+        return value;
+    },
     calculate() {
       if (!this.hero) {
         alert(this.$t('alert.select_hero'));
@@ -95,28 +132,60 @@ export default {
         return;
       }
 
+      const results = [];
       const checker = new Checker(this.hero, this.conditions);
-      this.results = [];
-      const numberList = this.equipmentsPerPart.map(equipments => equipments.length);
-      for (let i = 5; i > 0; i--)
-        numberList[i - 1] *= numberList[i];
+      const calculationResult = new Array(6);
 
-      for (let i = 0; i < numberList[0]; i++) {
-        const calculator = new Calculator(this.hero);
-        const elements = this.equipmentsPerPart.map((equipments, index) => equipments[~~(i % numberList[index] / (numberList[index + 1] || 1))]);
+      try {
+        this.equipmentsPerPart[0].forEach(e0 => {
+          calculationResult[0] = this.calculateEquipment(e0, this.emptyResult());
 
-        const calculationResult = calculator.calculate(elements);
-        if (checker.check(calculationResult))
-          this.results.push({ equipments: elements, calculationResult: calculationResult });
+          this.equipmentsPerPart[1].forEach(e1 => {
+            calculationResult[1] = this.calculateEquipment(e1, calculationResult[0]);
 
-        if (this.results.length > 100) {
-          alert(this.$t('alert.too_many_results'));
-          break;
-        }
+            this.equipmentsPerPart[2].forEach(e2 => {
+              calculationResult[2] = this.calculateEquipment(e2, calculationResult[1]);
+
+              this.equipmentsPerPart[3].forEach(e3 => {
+                calculationResult[3] = this.calculateEquipment(e3, calculationResult[2]);
+
+                this.equipmentsPerPart[4].forEach(e4 => {
+                  calculationResult[4] = this.calculateEquipment(e4, calculationResult[3]);
+
+                  this.equipmentsPerPart[5].forEach(e5 => {
+                    calculationResult[5] = this.calculateEquipment(e5, calculationResult[4]);
+
+                    const equipments = [e0, e1, e2, e3, e4, e5];
+                    const result = this.calculateSetEffect(equipments, calculationResult[5]);
+
+                    for (let key in result)
+                      result[key] = Math.ceil(result[key]);
+
+                    if (checker.check(result))
+                      results.push({ equipments: equipments, calculationResult: result });
+
+                    if (results.length > 100) throw 'too_many_results';
+                  });
+                });
+              });
+            });
+          });
+        });
+      } catch(e) {
+        alert(this.$t(`alert.${e}`));
+        return;
       }
 
-      if (this.results.length === 0)
+      if (results.length === 0)
         alert(this.$t('alert.no_data'));
+
+      this.results = results;
+    },
+    emptyResult() {
+      return statIdList.reduce((result, id) => {
+        result[id] = 0;
+        return result;
+      }, {});
     },
     onOffEquipmentFormDialog(equipment) {
       this.equipment = equipment;
