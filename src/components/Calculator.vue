@@ -21,7 +21,7 @@
         </div>
         <div class="Calculator__result" v-for="(result, index) in results" v-bind:key="index">
           <EquipmentSummary
-            v-for="equipment in result"
+            v-for="equipment in result.equipments"
             v-bind:key="equipment.id"
             :equipment="equipment"
             @click="onOffEquipmentFormDialog(equipment)"
@@ -31,7 +31,7 @@
             size="small"
             label="✓"
             :disabled="clickedIndex === index"
-            @click="updateHeroInfo(index, calculator.calculate(result))"
+            @click="updateHeroInfo(index, result.calculationResult)"
           />
         </div>
       </div>
@@ -102,10 +102,12 @@ export default {
         numberList[i - 1] *= numberList[i];
 
       for (let i = 0; i < numberList[0]; i++) {
+        const calculator = new Calculator(this.hero);
         const elements = this.equipmentsPerPart.map((equipments, index) => equipments[~~(i % numberList[index] / (numberList[index + 1] || 1))]);
 
-        if (checker.check(this.calculator.calculate(elements)))
-          this.results.push(elements);
+        const calculationResult = calculator.calculate(elements);
+        if (checker.check(calculationResult))
+          this.results.push({ equipments: elements, calculationResult: calculationResult });
 
         if (this.results.length > 100) {
           alert(this.$t('alert.too_many_results'));
@@ -131,9 +133,6 @@ export default {
     }
   },
   computed: {
-    calculator() {
-      return new Calculator(this.hero);
-    },
     equipmentsPerPart() {
       return equipmentPartList.map(part => {
         return this.equipments.filter(equipment => (
